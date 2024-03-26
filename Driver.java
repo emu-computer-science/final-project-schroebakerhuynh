@@ -1,3 +1,4 @@
+import java.io.File;
 import java.util.Scanner;
 
 public class Driver {
@@ -79,4 +80,8 @@ public class Driver {
     private static void quit() {
         System.out.println("Quitting: Goodbye ...");
     }
+
+    public void readInPlayerFile(File playerFile, String playerType){
+		System.out.println("Players read in");
+	}
 }
