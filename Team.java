@@ -13,8 +13,8 @@ import java.io.*;
 public class Team {
 	//included data members
 	private ArrayList<Player> roster;
-	private ArrayList<Player> freeAgents;
-	private ArrayList<Player> allPlayers;
+	//private ArrayList<Player> freeAgents;  //These will be removed and added to the Driver class as new Team objects
+	//private ArrayList<Player> allPlayers;  // ^               ^                         ^                          ^
 	private int teamOwner;
 	private String teamName;
 	
