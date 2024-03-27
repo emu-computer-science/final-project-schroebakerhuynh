@@ -1,3 +1,5 @@
+import static orc.junit.Assert.*;
+
 public class testPitcherStats {
     @Test
 	public void testPitcherStatsConstructor() {
