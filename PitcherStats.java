@@ -25,6 +25,31 @@ public class PitcherStats {
 
     public PitcherStats(){}
 
+    public PitcherStats(String line[]){
+        this.W = line[4].isEmpty() ? 0 : Integer.valueOf(line[4]);
+        this.L = line[5].isEmpty() ? 0 : Integer.valueOf(line[5]);
+        this.WLp = line[6].isEmpty() ? 0 : Double.valueOf(line[6]);
+        this.ERA = line[7].isEmpty() ? 0 : Double.valueOf(line[7]);
+        this.GS = line[9].isEmpty() ? 0 : Integer.valueOf(line[9]);
+        this.GF = line[10].isEmpty() ? 0 : Integer.valueOf(line[10]);
+        this.CG = line[11].isEmpty() ? 0 : Integer.valueOf(line[11]);
+        this.SHO = line[12].isEmpty() ? 0 : Integer.valueOf(line[12]);
+        this.SV = line[13].isEmpty() ? 0 : Integer.valueOf(line[13]);
+        this.IP = line[14].isEmpty() ? 0 : Double.valueOf(line[14]);
+        this.ER = line[17].isEmpty() ? 0 : Integer.valueOf(line[17]);
+        this.BK = line[23].isEmpty() ? 0 : Integer.valueOf(line[23]);
+        this.WP = line[24].isEmpty() ? 0 : Integer.valueOf(line[24]);
+        this.BF = line[25].isEmpty() ? 0 : Integer.valueOf(line[25]);
+        this.ERAp = line[26].isEmpty() ? 0 : Double.valueOf(line[26]);
+        this.FIP = line[27].isEmpty() ? 0 : Double.valueOf(line[27]); 
+        this.WHIP = line[28].isEmpty() ? 0 : Double.valueOf(line[28]);
+        this.H9 = line[29].isEmpty() ? 0 : Double.valueOf(line[29]);
+        this.HR9 = line[30].isEmpty() ? 0 : Double.valueOf(line[30]);
+        this.BB9 = line[31].isEmpty() ? 0 : Double.valueOf(line[31]);
+        this.SO9 = line[32].isEmpty() ? 0 : Double.valueOf(line[32]);
+        this.SOperW = line[33].isEmpty() ? 0 : Double.valueOf(line[33]);
+    }
+
     public int getW() throws Exception{
         System.out.println("Getter");
         return 0;
