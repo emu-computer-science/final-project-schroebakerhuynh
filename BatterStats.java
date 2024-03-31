@@ -16,8 +16,28 @@ public class BatterStats {
     int GDP;
     int SH;
     int SF;
+    
 
     public BatterStats(){
+    }
+
+    public BatterStats(String[] line){
+        this.PA = line[5].isEmpty() ? 0 : Integer.valueOf(line[5]);
+        this.AB = line[6].isEmpty() ? 0 : Integer.valueOf(line[6]);
+        this.doubles = line[9].isEmpty() ? 0 : Integer.valueOf(line[9]);
+        this.triples = line[10].isEmpty() ? 0 : Integer.valueOf(line[10]);
+        this.RBI = line[12].isEmpty() ? 0 : Integer.valueOf(line[12]);
+        this.SB = line[13].isEmpty() ? 0 : Integer.valueOf(line[13]);
+        this.CS = line[14].isEmpty() ? 0 : Integer.valueOf(line[14]);
+        this.BA = line[17].isEmpty() ? 0 : Double.valueOf(line[17]);
+        this.OBP = line[18].isEmpty() ? 0 : Double.valueOf(line[18]);
+        this.SLG = line[19].isEmpty() ? 0 : Double.valueOf(line[19]);
+        this.OPS = line[20].isEmpty() ? 0 : Double.valueOf(line[20]);
+        this.OPSplus = line[21].isEmpty() ? 0 : Double.valueOf(line[21]);
+        this.TB = line[22].isEmpty() ? 0 : Integer.valueOf(line[22]);
+        this.GDP = line[23].isEmpty() ? 0 : Integer.valueOf(line[23]);
+        this.SH = line[25].isEmpty() ? 0 : Integer.valueOf(line[25]);
+        this.SF = line[26].isEmpty() ? 0 : Integer.valueOf(line[26]);
     }
 
     //BATTER SPECIFIC

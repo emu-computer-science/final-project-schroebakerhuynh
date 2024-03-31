@@ -1,7 +1,9 @@
-import java.io.File;
-import java.util.Scanner;
+import java.io.*;
+import java.util.*;
+import java.nio.charset.*;
 
 public class Driver {
+    ArrayList<Player> playerDB = new ArrayList<Player>();
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
@@ -82,6 +84,17 @@ public class Driver {
     }
 
     public void readInPlayerFile(File playerFile, String playerType){
-		System.out.println("Players read in");
+		try {
+            BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(playerFile), StandardCharsets.UTF_8));
+            String line = br.readLine();
+            while((line = br.readLine()) != null){
+                System.out.println(line);
+                String[] thisPlayerStats = line.split(",");
+                playerDB.add(new Player(thisPlayerStats, playerType));
+            }
+            br.close();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
 	}
 }
