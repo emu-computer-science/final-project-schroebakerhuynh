@@ -13,11 +13,13 @@ public class Driver {
             System.out.println("Main Menu:");
             System.out.println("1. Display players");
             System.out.println("2. Search for specific player");
-            System.out.println("3. Add Team");
-            System.out.println("4. Display Teams");
-            System.out.println("5. Save");
-            System.out.println("6. Load");
-            System.out.println("7. Quit");
+            System.out.println("3. IDRAFT");
+            System.out.println("4. ODRAFT");
+            System.out.println("5. Add Team");
+            System.out.println("6. Display Teams");
+            System.out.println("7. Save");
+            System.out.println("8. Load");
+            System.out.println("9. Quit");
             System.out.println("Enter your choice:");
             
             int choice = scanner.nextInt();
@@ -31,18 +33,24 @@ public class Driver {
                     searchPlayer();
                     break;
                 case 3:
-                    addTeam();
+                    idraft();
                     break;
                 case 4:
-                    displayTeam();
+                    odraft();
                     break;
                 case 5:
-                    save();
+                    addTeam();
                     break;
                 case 6:
-                    load();
+                    displayTeam();
                     break;
                 case 7:
+                    save();
+                    break;
+                case 8:
+                    load();
+                    break;
+                case 9:
                     quit();
                     running = false;
                     break;
@@ -56,11 +64,21 @@ public class Driver {
     }
     
     private static void displayPlayers() {
-        System.out.println("Displaying players...");
+        Driver driver = new Driver();
+        driver.readInPlayerFile(new File("mlb_al_batter_stats_2023.txt"), "Batter");
+        driver.readInPlayerFile(new File("mlb_al_pitching_stats_2023.txt"), "Pitcher");
     }
     
     private static void searchPlayer() {
         System.out.println("Searching for a specific player...");
+    }
+
+    private static void idraft() {
+        System.out.println("idraft...");
+    }
+
+    private static void odraft() {
+        System.out.println("odraft...");
     }
 
     private static void addTeam() {
