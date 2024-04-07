@@ -12,22 +12,22 @@ public class Driver {
         while (running) {
             // Display main menu
             System.out.println("Main Menu:");
-            System.out.println("1. Display players");
-            System.out.println("2. Search player");
-            System.out.println("3. IDRAFT");
-            System.out.println("4. ODRAFT");
-            System.out.println("5. OVERALL");
-            System.out.println("6. POVERALL");
-            System.out.println("7. TEAM");
-            System.out.println("8. STARS");
-            System.out.println("9. Add Team");
-            System.out.println("10. Display teams");
-            System.out.println("11. Save");
-            System.out.println("12. Quit");
-            System.out.println("13. RESTORE");
-            System.out.println("14. EVALFUN");
-            System.out.println("15. PEVALFUN");
-            System.out.println("16. Help");
+            System.out.println("Display players");
+            System.out.println("Search player");
+            System.out.println("IDRAFT");
+            System.out.println("ODRAFT");
+            System.out.println("OVERALL");
+            System.out.println("POVERALL");
+            System.out.println("TEAM");
+            System.out.println("STARS");
+            System.out.println("Add Team");
+            System.out.println("Display teams");
+            System.out.println("Save");
+            System.out.println("Quit");
+            System.out.println("RESTORE");
+            System.out.println("EVALFUN");
+            System.out.println("PEVALFUN");
+            System.out.println("Help");
             System.out.println("Enter your choice:");
             
             String choice = scanner.nextLine();
