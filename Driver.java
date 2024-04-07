@@ -13,55 +13,68 @@ public class Driver {
             // Display main menu
             System.out.println("Main Menu:");
             System.out.println("1. Display players");
-            System.out.println("2. Search for specific player");
+            System.out.println("2. Search player");
             System.out.println("3. IDRAFT");
             System.out.println("4. ODRAFT");
             System.out.println("5. OVERALL");
             System.out.println("6. POVERALL");
-            System.out.println("7. Add Team");
-            System.out.println("8. Display Teams");
-            System.out.println("9. Save");
-            System.out.println("10. Load");
-            System.out.println("11. Quit");
+            System.out.println("7. TEAM");
+            System.out.println("8. STARS");
+            System.out.println("9. Add Team");
+            System.out.println("10. Display teams");
+            System.out.println("11. Save");
+            System.out.println("12. Quit");
+            System.out.println("13. RESTORE");
+            System.out.println("14. EVALFUN");
+            System.out.println("15. PEVALFUN");
+            System.out.println("16. Help");
             System.out.println("Enter your choice:");
             
-            int choice = scanner.nextInt();
-            scanner.nextLine(); 
+            String choice = scanner.nextLine();
             
-            switch (choice) {
-                case 1:
+            switch (choice.toUpperCase()) {
+                case "DISPLAY PLAYERS":
                     displayPlayers();
                     break;
-                case 2:
+                case "SEARCH PLAYER":
                     searchPlayer();
                     break;
-                case 3:
+                case "IDRAFT":
                     idraft();
                     break;
-                case 4:
+                case "ODRAFT":
                     odraft();
                     break;
-                case 5:
+                case "OVERALL":
                     overall();
                     break;
-                case 6:
+                case "POVERALL":
                     poverall();
                     break;
-                case 7:
+                case "ADD TEAM":
                     addTeam();
                     break;
-                case 8:
+                case "DISPLAY TEAMS":
                     displayTeam();
                     break;
-                case 9:
+                case "SAVE":
                     save();
                     break;
-                case 10:
-                    load();
-                    break;
-                case 11:
+                case "QUIT":
                     quit();
                     running = false;
+                    break;
+                case "RESTORE":
+                    restore();
+                    break;
+                case "EVALFUN":
+                    evalFun();
+                    break;
+                case "PEVALFUN":
+                    pevalFun();
+                    break;
+                case "HELP":
+                    help();
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -180,12 +193,24 @@ public class Driver {
         System.out.println("Saving data...");
     }
 
-    private static void load() {
-        System.out.println("Loading data...");
+    private static void quit() {
+        System.out.println("Quitting: Goodbye...");
     }
 
-    private static void quit() {
-        System.out.println("Quitting: Goodbye ...");
+    private static void restore() {
+        System.out.println("Restoring...");   
+    }
+
+    private static void evalFun() {
+        System.out.println("EVALFUN...");
+    }
+
+    private static void pevalFun() {
+        System.out.println("PEVALFUN...");
+    }
+
+    private static void help() {
+        System.out.println("HELP...");
     }
 
     public void readInPlayerFile(File playerFile, String playerType){
