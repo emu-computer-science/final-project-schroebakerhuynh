@@ -3,9 +3,13 @@ import java.util.*;
 import java.nio.charset.*;
 
 public class Driver {
-    ArrayList<Player> playerDB = new ArrayList<Player>();
+    public static ArrayList<Player> playerDB = new ArrayList<Player>();
+    public static ArrayList<Player> freeAgents = new ArrayList<Player>();
     
     public static void main(String[] args) {
+        Driver driver = new Driver();
+        driver.readInPlayerFile(new File("mlb_al_batter_stats_2023.txt"), "Batter");
+        driver.readInPlayerFile(new File("mlb_al_pitching_stats_2023.txt"), "Pitcher");
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
         
@@ -42,7 +46,8 @@ public class Driver {
                     odraft();
                     break;
                 case 5:
-                    overall();
+                    Team thisTeam = new Team();
+                    overall("C", thisTeam);
                     break;
                 case 6:
                     poverall();
@@ -73,23 +78,20 @@ public class Driver {
     }
     
     private static void displayPlayers() {
-        Driver driver = new Driver();
-        driver.readInPlayerFile(new File("mlb_al_batter_stats_2023.txt"), "Batter");
-        driver.readInPlayerFile(new File("mlb_al_pitching_stats_2023.txt"), "Pitcher");
-    
+  
         int pageSize = 20;
         int currentPage = 0;
-        int totalPages = (int) Math.ceil((double) driver.playerDB.size() / pageSize);
+        int totalPages = (int) Math.ceil((double) playerDB.size() / pageSize);
     
         Scanner scanner = new Scanner(System.in);
     
         while (currentPage < totalPages) {
             int startIndex = currentPage * pageSize;
-            int endIndex = Math.min((currentPage + 1) * pageSize, driver.playerDB.size());
+            int endIndex = Math.min((currentPage + 1) * pageSize, playerDB.size());
     
             for (int i = startIndex; i < endIndex; i++) {
-                Player player = driver.playerDB.get(i);
-                System.out.println(player.playerType + player.playerName);
+                Player player = playerDB.get(i);
+                System.out.println(player.playerType +" "+player.playerName+" "+player.position);
             }
     
             System.out.println("\nPage " + (currentPage + 1) + " of " + totalPages);
@@ -160,8 +162,23 @@ public class Driver {
         System.out.println("ODRAFT...");
     }
 
-    private static void overall() {
-        System.out.println("OVERALL...");
+    private static void overall(String pos, Team thisTeam){
+        try {
+            pos = pos.trim().toUpperCase();
+            if(thisTeam.hasPosition(pos)){
+                throw new Exception("TEAM ALREADY CONTAINS A PLAYER OF THIS POSITION");
+            }else{
+                for(Player thisFreeAgent : freeAgents){
+                    if(thisTeam.hasPosition(thisFreeAgent.position) || thisFreeAgent.playerType.equals("Pitcher")){
+                        continue;
+                    }else{
+                        System.out.println(thisFreeAgent.playerName+" "+thisFreeAgent.mlbTeam+" "+thisFreeAgent.position);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void poverall() {
@@ -193,9 +210,9 @@ public class Driver {
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(playerFile), StandardCharsets.UTF_8));
             String line = br.readLine();
             while((line = br.readLine()) != null){
-                //System.out.println(line);
                 String[] thisPlayerStats = line.split(",");
                 playerDB.add(new Player(thisPlayerStats, playerType));
+                freeAgents.add(new Player(thisPlayerStats, playerType));
             }
             br.close();
         } catch (Exception e) {

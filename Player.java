@@ -10,7 +10,7 @@ public class Player{
     int age;
     String mlbTeam;
     String fantasyTeam;
-    int teamsDraftOrder;
+    int draftPosition;
     int G;
     int H;
     int HR;
@@ -33,7 +33,7 @@ public class Player{
             this.age = line[2].isEmpty() ? -1 : Integer.valueOf(line[2]);
             this.mlbTeam = line[3];
             this.fantasyTeam = "FreeAgent";
-            this.teamsDraftOrder = -1;
+            this.draftPosition = -1;
             this.G = line[4].isEmpty() ? 0 : Integer.valueOf(line[4]);
             this.H = line[8].isEmpty() ? 0 : Integer.valueOf(line[8]);
             this.HR = line[11].isEmpty() ? 0 : Integer.valueOf(line[11]);
@@ -50,7 +50,7 @@ public class Player{
             this.age = Integer.valueOf(line[2]);
             this.mlbTeam = line[3];
             this.fantasyTeam = "FreeAgent";
-            this.teamsDraftOrder = -1;
+            this.draftPosition = -1;
             this.G = line[8].isEmpty() ? 0 : Integer.valueOf(line[8]);
             this.H = line[15].isEmpty() ? 0 : Integer.valueOf(line[15]);
             this.HR = line[18].isEmpty() ? 0 : Integer.valueOf(line[18]);
