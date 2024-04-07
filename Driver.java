@@ -132,7 +132,7 @@ public class Driver {
                     }
                     break;
                 case 3:
-                    return; // Return to menu
+                    return;
                 default:
                     System.out.println("Invalid choice. Please try again.");
                     break;
