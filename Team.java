@@ -15,7 +15,7 @@ public class Team {
 		//private ArrayList<Player> freeAgents;  //These will be removed and added to the Driver class as new Team objects
 		//private ArrayList<Player> allPlayers;  // ^      ^                            ^                        ^
 
-		private ArrayList<Player> roster;
+		private ArrayList<Player> roster = new ArrayList<Player>();
 		private int teamOwner;
 		private String teamName;
 		private Player catcher;
@@ -41,6 +41,7 @@ public class Team {
 			System.out.print("\nEnter a number for the Team: " );
 				try {
 					num = input.nextInt();
+					input.nextLine();
 				}
 				catch (InputMismatchException ex) {
 					System.out.println("Input Mismatch. Try Again");
@@ -51,7 +52,6 @@ public class Team {
 				System.out.print("\nEnter a team name: " );
 				teamName = input.nextLine();
 			}
-			input.close();
 			
 			teamOwner = num;
 			catcher = null;
@@ -150,6 +150,61 @@ public class Team {
 	//method to release a player as a Free Agent
 	public void release() {
 		System.out.println("Player released");
+	}
+
+	public boolean hasPosition(String pos){
+		switch(pos){
+			case "C":
+				if(catcher == null){
+					return false;
+				}else{
+					return true;
+				}
+			case "1B":
+				if(firstbase == null){
+					return false;
+				}else{
+					return true;
+				}
+			case "2B":
+				if(secondbase == null){
+					return false;
+				}else{
+					return true;
+				}
+			case "3B":
+				if(thirdbase == null){
+					return false;
+				}else{
+					return true;
+				}
+			case "SS":
+				if(shortstop == null){
+					return false;
+				}else{
+					return true;
+				}
+			case "LF":
+				if(leftfield == null){
+					return false;
+				}else{
+					return true;
+				}
+			case "CF":
+				if(centerfield == null){
+					return false;
+				}else{
+					return true;
+				}	
+			case "RF":
+				if(rightfield == null){
+					return false;
+				}else{
+					return true;
+				}
+			default:
+				return false;	
+		}
 	}
 	
 	
