@@ -53,7 +53,8 @@ public class Driver {
                     overall("C", thisTeam);
                     break;
                 case "POVERALL":
-                    poverall();
+                    Team thisTeamPoverall = new Team();
+                    poverall("C", thisTeamPoverall);
                     break;
                 case "ADD TEAM":
                     Team myTeam = new Team();;
@@ -196,8 +197,23 @@ public class Driver {
         }
     }
 
-    private static void poverall() {
-        System.out.println("POVERALL...");
+    private static void poverall(String pos, Team thisTeam){
+        try {
+            pos = pos.trim().toUpperCase();
+            if(thisTeam.hasPosition(pos)){
+                throw new Exception("TEAM ALREADY CONTAINS A PLAYER OF THIS POSITION");
+            }else{
+                for(Player thisFreeAgent : freeAgents){
+                    if(thisFreeAgent.playerType.equals("Pitcher")){
+                        continue;
+                    }else{
+                        System.out.println(thisFreeAgent.playerName+" "+thisFreeAgent.mlbTeam+" "+thisFreeAgent.position);
+                    }
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void addTeam() {
