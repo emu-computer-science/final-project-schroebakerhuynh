@@ -16,57 +16,72 @@ public class Driver {
         while (running) {
             // Display main menu
             System.out.println("Main Menu:");
-            System.out.println("1. Display players");
-            System.out.println("2. Search for specific player");
-            System.out.println("3. IDRAFT");
-            System.out.println("4. ODRAFT");
-            System.out.println("5. OVERALL");
-            System.out.println("6. POVERALL");
-            System.out.println("7. Add Team");
-            System.out.println("8. Display Teams");
-            System.out.println("9. Save");
-            System.out.println("10. Load");
-            System.out.println("11. Quit");
-            System.out.println("Enter your choice:");
+            System.out.println("Display players");
+            System.out.println("Search for specific player");
+            System.out.println("IDRAFT");
+            System.out.println("ODRAFT");
+            System.out.println("OVERALL");
+            System.out.println("POVERALL");
+            System.out.println("Add Team");
+            System.out.println("Display Teams");
+            System.out.println("Save");
+            System.out.println("Load");
+            System.out.println("Quit");
+            System.out.println("Restore");
+            System.out.println("Evalfun");
+            System.out.println("Pevealfun");
+            System.out.println("Help");
+            System.out.print("\nEnter your choice: ");
             
-            int choice = scanner.nextInt();
-            scanner.nextLine(); 
+            String choice = scanner.nextLine();
             
-            switch (choice) {
-                case 1:
+            switch (choice.toUpperCase()) {
+                case "DISPLAY PLAYERS":
                     displayPlayers();
                     break;
-                case 2:
+                case "SEARCH PLAYERS":
                     searchPlayer();
                     break;
-                case 3:
+                case "IDRAFT":
                     Team.iDraft();
                     break;
-                case 4:
+                case "ODRAFT":
                     Team.oDraft();
                     break;
-                case 5:
+                case "OVERALL":
                     Team thisTeam = new Team();
                     overall("C", thisTeam);
                     break;
-                case 6:
+                case "POVERALL":
                     poverall();
                     break;
-                case 7:
-                    addTeam();
+                case "ADD TEAM":
+                    Team myTeam = new Team();;
                     break;
-                case 8:
+                case "DISPLAY TEAMS":
                     displayTeam();
                     break;
-                case 9:
+                case "SAVE":
                     save();
                     break;
-                case 10:
+                case "LOAD":
                     load();
                     break;
-                case 11:
+                case "QUIT":
                     quit();
                     running = false;
+                    break;
+                case "RESTORE":
+                    restore();
+                    break;
+                case "EVALFUN":
+                    evalFun();
+                    break;
+                case "PEVALFUN":
+                    pevalFun();
+                    break;
+                case "HELP":
+                    help();
                     break;
                 default:
                     System.out.println("Invalid choice. Please try again.");
@@ -203,6 +218,22 @@ public class Driver {
 
     private static void quit() {
         System.out.println("Quitting: Goodbye ...");
+    }
+
+    private static void restore() {
+        System.out.println("Restoring...");
+    }
+
+    private static void evalFun() {
+        System.out.println("EVALFUN...");
+    }
+
+    private static void pevalFun() {
+        System.out.println("PEVALFUN...");
+    }
+
+    private static void help() {
+        System.out.println("HELP...");
     }
 
     public void readInPlayerFile(File playerFile, String playerType){

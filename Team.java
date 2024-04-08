@@ -53,7 +53,7 @@ public class Team {
 					repeat = true;
 				}
 				
-				System.out.print("\nEnter a team name: " );
+				System.out.print("Enter a team name: " );
 				teamName = input.nextLine();
 			}
 			
@@ -88,7 +88,7 @@ public class Team {
 			
 			
 			
-			System.out.println("\nTeam " + teamOwner + " successfully created");
+			System.out.println("\nTeam " + teamOwner + " successfully created\n");
 		}
 
 //***********************************METHODS********************************************
