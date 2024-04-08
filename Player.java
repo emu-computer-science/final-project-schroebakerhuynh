@@ -217,4 +217,11 @@ public class Player{
         this.HBP = newHBP;
     }
     
+    public void setDraftPosition (int num) {             //added by Adam 4/7/24
+    	this.draftPosition = num;
+    }
+
+    public int getDraftPosition() {                     //added by Adam 4/7/24
+    	return draftPosition;
+    }
 }
