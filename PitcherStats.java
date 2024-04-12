@@ -1,27 +1,27 @@
 public class PitcherStats {
     //Pitcher Stats
-    int W;
-    int L;
-    double WLp;
-    double ERA;
-    int GS;
-    int GF;
-    int CG;
-    int SHO;
-    int SV;
-    double IP;
-    int ER;
-    int BK;
-    int WP;
-    int BF;
-    double ERAp;
-    double FIP;
-    double WHIP;
-    double H9;
-    double HR9;
-    double BB9;
-    double SO9;
-    double SOperW;
+    private int W;
+    private int L;
+    private double WLp;
+    private double ERA;
+    private int GS;
+    private int GF;
+    private int CG;
+    private int SHO;
+    private int SV;
+    private double IP;
+    private int ER;
+    private int BK;
+    private int WP;
+    private int BF;
+    private double ERAp;
+    private double FIP;
+    private double WHIP;
+    private double H9;
+    private double HR9;
+    private double BB9;
+    private double SO9;
+    private double SOperW;
 
     public PitcherStats(){}
 
@@ -51,197 +51,179 @@ public class PitcherStats {
     }
 
     public int getW() throws Exception{
-        System.out.println("Getter");
-        return 0;
+        return this.W;
     }
 
     public void setW(int newW) throws Exception{
-        System.out.println("Setter");
+        this.W = newW;
     }
     
     public int getL() throws Exception{
-        System.out.println("Getter");
-        return 0;
+        return this.L;
     }
 
     public void setL(int newL) throws Exception{
-        System.out.println("Setter");
+        this.L = newL;
     }
 
     public double getWLp() throws Exception{
-        System.out.println("Getter");
-        return 0.0;
+        return this.WLp;
+    }
+
+    public void setWLp(double newWLp) throws Exception{
+        this.WLp = newWLp;
     }
 
     public double getERA() throws Exception{
-        System.out.println("Getter");
-        return 0.0;
+        return this.ERA;
     }
 
     public void setERA(double newERA) throws Exception{
-        System.out.println("Setter");
+        this.ERA = newERA;
     }
 
     public int getGS() throws Exception{
-        System.out.println("Returns GS");
-        return 0;
+        return this.GS;
     }
 
     public void setGS(int newGS) throws Exception{
-        System.out.println("Sets GS");
+        this.GS = newGS;
     }
 
     public int getGF() throws Exception{
-        System.out.println("Getter");
-        return 0;
+        return this.GF;
     }
 
     public void setGF(int newGF) throws Exception{
-        System.out.println("Setter");
+        this.GF = newGF;
     }
 
     public int getCG() throws Exception{
-        System.out.println("Getter");
-        return 0;
+        return this.CG;
     }
 
     public void setCG(int newCG) throws Exception{
-        System.out.println("Setter");
+        this.CG = newCG;
     }
 
     public int getSHO() throws Exception{
-        System.out.println("Getter");
-        return 0;
+       return this.SHO;
     }
 
     public void setSHO(int newSHO) throws Exception{
-        System.out.println("Setter");
+        this.SHO = newSHO;
     }
 
     public int getSV() throws Exception{
-        System.out.println("Getter");
-        return 0;
+        return this.SV;
     }
 
     public void setSV(int newSV) throws Exception{
-        System.out.println("Setter");
+        this.SV = newSV;
     }
 
     public double getIP() throws Exception{
-        System.out.println("Getter");
-        return 0;
+        return this.IP;
     }
 
     public void setIP(double newIP) throws Exception{
-        System.out.println("Setter");
+        this.IP = newIP;
     }
 
     public int getER() throws Exception {
-        System.out.println("Getter");
-        return 0;
+       return this.ER;
     }
 
     public void setER(int newER) throws Exception {
-        System.out.println("Setter");
+        this.ER = newER;
     }
 
     public int getBK() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.BK;
     }
 
     public void setBK(int newBK) throws Exception {
-        System.out.println("Setter");
+        this.BK = newBK;
     }
 
     public int getWP() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.WP;
     }
 
     public void setWP(int newWP) throws Exception {
-        System.out.println("Setter");
+        this.WP = newWP;
     }
 
     public int getBF() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.BF;
     }
 
     public void setBF(int newBF) throws Exception {
-        System.out.println("Setter");
+        this.BF = newBF;
     }
 
     public double getERAp() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.ERAp;
     }
 
     public void setERAp(double newERAp) throws Exception {
-        System.out.println("Setter");
+        this.ERAp = newERAp;
     }
 
     public double getFIP() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.FIP;
     }
 
     public void setFIP(double newFIP) throws Exception {
-        System.out.println("Setter");
+        this.FIP = newFIP;
     }
 
     public double getWHIP() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.WHIP;
     }
 
     public void setWHIP(double newWHIP) throws Exception {
-        System.out.println("Setter");
+        this.WHIP = newWHIP;
     }
 
     public double getH9() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.H9;
     }
 
     public void setH9(double newH9) throws Exception {
-        System.out.println("Setter");
+        this.H9 = newH9;
     }
 
     public double getHR9() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.HR9;
     }
 
     public void setHR9(double newHR9) throws Exception {
-        System.out.println("Setter");
+        this.HR9 = newHR9;
     }
 
     public double getBB9() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.BB9;
     }
 
     public void setBB9(double newBB9) throws Exception {
-        System.out.println("Setter");
+        this.BB9 = newBB9;
     }
 
     public double getSO9() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.SO9;
     }
 
     public void setSO9(double newSO9) throws Exception {
-        System.out.println("Setter");
+        this.SO9 = newSO9;
     }
 
     public double getSOperW() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.SOperW;
     }
 
     public void setSOperW(double newSOperW) throws Exception {
-        System.out.println("Setter");
+        this.SOperW = newSOperW;
     }
 
 
