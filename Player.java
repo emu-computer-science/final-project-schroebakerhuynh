@@ -4,21 +4,21 @@ import java.util.ArrayList;
 public class Player{
     
     //Both type stats
-    String playerType;
-    String position;
-    String playerName;
-    int age;
-    String mlbTeam;
-    String fantasyTeam;
-    int draftPosition;
-    int G;
-    int H;
-    int HR;
-    int BB;
-    int IBB;
-    int R;
-    int SO;
-    int HBP;
+    private String playerType;
+    private String position;
+    private String playerName;
+    private int age;
+    private String mlbTeam;
+    private String fantasyTeam;
+    private int draftPosition;
+    private int G;
+    private int H;
+    private int HR;
+    private int BB;
+    private int IBB;
+    private int R;
+    private int SO;
+    private int HBP;
     PitcherStats pitcherStats = new PitcherStats();
     BatterStats batterStats = new BatterStats();
     

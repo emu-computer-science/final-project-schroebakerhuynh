@@ -1,21 +1,21 @@
 public class BatterStats {
     //Batter Stats
-    int PA;
-    int AB;
-    int doubles;
-    int triples;
-    int RBI;
-    int SB;
-    int CS;
-    double BA;
-    double OBP;
-    double SLG;
-    double OPS;
-    double OPSplus;
-    int TB;
-    int GDP;
-    int SH;
-    int SF;
+    private int PA;
+    private int AB;
+    private int doubles;
+    private int triples;
+    private int RBI;
+    private int SB;
+    private int CS;
+    private double BA;
+    private double OBP;
+    private double SLG;
+    private double OPS;
+    private double OPSplus;
+    private int TB;
+    private int GDP;
+    private int SH;
+    private int SF;
     
 
     public BatterStats(){
@@ -43,146 +43,130 @@ public class BatterStats {
     //BATTER SPECIFIC
 
     public int getPA() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.PA;
     }
 
     public void setPA(int newPA) throws Exception {
-        System.out.println("Setter");
+        this.PA = newPA;
     }
 
     public int getAB() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.AB;
     }
 
     public void setAB(int newAB) throws Exception {
-        System.out.println("Setter");
+        this.AB = newAB;
     }
 
     public int getDoubles() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.doubles;
     }
 
     public void setDoubles(int newDoubles) throws Exception {
-        System.out.println("Setter");
+        this.doubles = newDoubles;
     }
 
     public int getTriples() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.triples;
     }
 
     public void setTriples(int newTriples) throws Exception {
-        System.out.println("Setter");
+        this.triples = newTriples;
     }
 
     public int getRBI() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.RBI;
     }
 
     public void setRBI(int newRBI) throws Exception {
-        System.out.println("Setter");
+        this.RBI = newRBI;
     }
 
     public int getSB() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.SB;
     }
 
     public void setSB(int newSB) throws Exception {
-        System.out.println("Setter");
+        this.SB = newSB;
     }
 
     public int getCS() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.CS;
     }
 
     public void setCS(int newCS) throws Exception {
-        System.out.println("Setter");
+        this.CS = newCS;
     }
 
     public double getBA() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.BA;
     }
 
     public void setBA(double newBA) throws Exception {
-        System.out.println("Setter");
+        this.BA = newBA;
     }
 
     public double getOBP() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.OBP;
     }
 
     public void setOBP(double newOBP) throws Exception {
-        System.out.println("Setter");
+        this.OBP = newOBP;
     }
 
     public double getSLG() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.SLG;
     }
 
     public void setSLG(double newSLG) throws Exception {
-        System.out.println("Setter");
+        this.SLG = newSLG;
     }
 
     public double getOPS() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.OPS;
     }
 
     public void setOPS(double newOPS) throws Exception {
-        System.out.println("Setter");
+        this.OPS = newOPS;
     }
 
     public double getOPSplus() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.OPSplus;
     }
 
     public void setOPSplus(double newOPSplus) throws Exception {
-        System.out.println("Setter");
+        this.OPSplus = newOPSplus;
     }
 
     public int getTB() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.TB;
     }
 
     public void setTB(int newTB) throws Exception {
-        System.out.println("Setter");
+        this.TB = newTB;
     }
 
     public int getGDP() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.GDP;
     }
 
     public void setGDP(int newGDP) throws Exception {
-        System.out.println("Setter");
+        this.GDP = newGDP;
     }
 
     public int getSH() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.SH;
     }
 
     public void setSH(int newSH) throws Exception {
-        System.out.println("Setter");
+        this.SH = newSH;
     }
 
     public int getSF() throws Exception {
-        System.out.println("Getter");
-        return 0;
+        return this.SF;
     }
 
     public void setSF(int newSF) throws Exception {
-        System.out.println("Setter");
+        this.SF = newSF;
     }
 }
