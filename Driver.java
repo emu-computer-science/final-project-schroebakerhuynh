@@ -201,13 +201,13 @@ public class Driver {
                     if(myTeam.hasPosition(thisFreeAgent.getPosition()) || thisFreeAgent.getPlayerType().equals("Pitcher")){
                         continue;
                     }else{
-                        System.out.println(thisFreeAgent.getPlayerName()+" "+thisFreeAgent.getMlbTeam()+" "+thisFreeAgent.getPosition());
+                        System.out.println(thisFreeAgent.getPlayerName()+" "+thisFreeAgent.getMlbTeam()+" "+thisFreeAgent.getPosition()+" "+thisFreeAgent.getEvaluationValue());
                     }
                 }
             }else{
                 for(Player thisFreeAgent : freeAgents){
                     if(thisFreeAgent.getPosition().equals(pos)){
-                        System.out.println(thisFreeAgent.getPlayerName()+" "+thisFreeAgent.getMlbTeam()+" "+thisFreeAgent.getPosition());
+                        System.out.println(thisFreeAgent.getPlayerName()+" "+thisFreeAgent.getMlbTeam()+" "+thisFreeAgent.getPosition()+thisFreeAgent.getEvaluationValue());
                     }
                 }
             }
@@ -229,7 +229,7 @@ public class Driver {
             }
             for(Player thisFreeAgent : freeAgents){
                 if(thisFreeAgent.getPlayerType().equals("Pitcher")){
-                    System.out.println(thisFreeAgent.getPlayerName()+" "+thisFreeAgent.getMlbTeam()+" "+thisFreeAgent.getPosition());
+                    System.out.println(thisFreeAgent.getPlayerName()+" "+thisFreeAgent.getMlbTeam()+" "+thisFreeAgent.getPosition()+" "+thisFreeAgent.getEvaluationValue());
                 }
             }
         } catch (Exception e) {
