@@ -1,6 +1,7 @@
 import java.io.File;
 import java.util.ArrayList;
 
+
 public class Player{
     
     //Both type stats
@@ -19,6 +20,7 @@ public class Player{
     private int R;
     private int SO;
     private int HBP;
+    private double evaluationValue;
     PitcherStats pitcherStats = new PitcherStats();
     BatterStats batterStats = new BatterStats();
     
@@ -223,5 +225,13 @@ public class Player{
 
     public int getDraftPosition() {                     //added by Adam 4/7/24
     	return draftPosition;
+    }
+
+    public void setEvaluationValue(double newEvalVal){
+        this.evaluationValue = newEvalVal;
+    }
+
+    public double getEvaluationValue(){
+        return this.evaluationValue;
     }
 }

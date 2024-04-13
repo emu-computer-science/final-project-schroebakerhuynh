@@ -1,10 +1,13 @@
 import java.io.*;
 import java.util.*;
 import java.nio.charset.*;
+import net.objecthunter.exp4j.Expression;
+import net.objecthunter.exp4j.ExpressionBuilder;
 
 public class Driver {
     public static ArrayList<Player> playerDB = new ArrayList<Player>();
     public static ArrayList<Player> freeAgents = new ArrayList<Player>();
+    public static Team myTeam;
     
     public static void main(String[] args) {
         Driver driver = new Driver();
@@ -28,8 +31,8 @@ public class Driver {
             System.out.println("Load");
             System.out.println("Quit");
             System.out.println("Restore");
-            System.out.println("Evalfun");
-            System.out.println("Pevealfun");
+            System.out.println("EVALFUN");
+            System.out.println("PEVALFUN");
             System.out.println("Help");
             System.out.print("\nEnter your choice: ");
             
@@ -49,14 +52,13 @@ public class Driver {
                     Team.oDraft();
                     break;
                 case "OVERALL":
-                    Team thisTeam = new Team();
-                    overall("C", thisTeam);
+                    overall();
                     break;
                 case "POVERALL":
                     poverall();
                     break;
                 case "ADD TEAM":
-                    Team myTeam = new Team();;
+                    myTeam = new Team();;
                     break;
                 case "DISPLAY TEAMS":
                     displayTeam();
@@ -75,10 +77,20 @@ public class Driver {
                     restore();
                     break;
                 case "EVALFUN":
-                    evalFun();
+                    try {
+                        evalFun();
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                        break;
+                    }
                     break;
                 case "PEVALFUN":
-                    pevalFun();
+                    try {
+                        pevalFun();
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                        break;
+                    }
                     break;
                 case "HELP":
                     help();
@@ -106,7 +118,7 @@ public class Driver {
     
             for (int i = startIndex; i < endIndex; i++) {
                 Player player = playerDB.get(i);
-                System.out.println(player.playerType +" "+player.playerName+" "+player.position);
+                System.out.println(player.getPlayerType() +" "+player.getPlayerName()+" "+player.getPosition());
             }
     
             System.out.println("\nPage " + (currentPage + 1) + " of " + totalPages);
@@ -156,9 +168,9 @@ public class Driver {
         String playerNameToSearch = scanner.nextLine();
     
         boolean playerFound = false;
-        for (Player player : driver.playerDB) {
+        for (Player player : playerDB) {
             if (player.getPlayerName().equalsIgnoreCase(playerNameToSearch)) {
-                System.out.println(player.playerType +" "+ player.playerName +" "+ player.position);
+                System.out.println(player.getPlayerType() +" "+ player.getPlayerName() +" "+ player.getPosition());
                 playerFound = true;
                 break;
             }
@@ -169,25 +181,33 @@ public class Driver {
         }
     }
 
-    private static void idraft() {
-        System.out.println("IDRAFT...");
-    }
-
-    private static void odraft() {
-        System.out.println("ODRAFT...");
-    }
-
-    private static void overall(String pos, Team thisTeam){
+    private static void overall(){
         try {
+            if(myTeam == null){
+                System.out.println("NEED TO CREATE YOUR TEAM FIRST");
+                return;
+            }
+
+            Scanner input = new Scanner(System.in);
+            System.out.print("\nENTER POSITION (ALL FOR ALL PLAYERS): ");
+            String pos = input.nextLine();
             pos = pos.trim().toUpperCase();
-            if(thisTeam.hasPosition(pos)){
-                throw new Exception("TEAM ALREADY CONTAINS A PLAYER OF THIS POSITION");
-            }else{
+            if(myTeam.hasPosition(pos)){
+                System.out.println("TEAM ALREADY HAS THIS POSITION");
+                return; 
+            }
+            if(pos.equals("ALL")){
                 for(Player thisFreeAgent : freeAgents){
-                    if(thisTeam.hasPosition(thisFreeAgent.position) || thisFreeAgent.playerType.equals("Pitcher")){
+                    if(myTeam.hasPosition(thisFreeAgent.getPosition()) || thisFreeAgent.getPlayerType().equals("Pitcher")){
                         continue;
                     }else{
-                        System.out.println(thisFreeAgent.playerName+" "+thisFreeAgent.mlbTeam+" "+thisFreeAgent.position);
+                        System.out.println(thisFreeAgent.getPlayerName()+" "+thisFreeAgent.getMlbTeam()+" "+thisFreeAgent.getPosition());
+                    }
+                }
+            }else{
+                for(Player thisFreeAgent : freeAgents){
+                    if(thisFreeAgent.getPosition().equals(pos)){
+                        System.out.println(thisFreeAgent.getPlayerName()+" "+thisFreeAgent.getMlbTeam()+" "+thisFreeAgent.getPosition());
                     }
                 }
             }
@@ -197,7 +217,24 @@ public class Driver {
     }
 
     private static void poverall() {
-        System.out.println("POVERALL...");
+        try {
+            if(myTeam == null){
+                System.out.println("NEED TO CREATE YOUR TEAM FIRST");
+                return;
+            }
+
+            if(myTeam.hasFullPitchingStaff()){
+                System.out.println("TEAM'S PITCHING STAFF IS ALREADY FULL");
+                return;
+            }
+            for(Player thisFreeAgent : freeAgents){
+                if(thisFreeAgent.getPlayerType().equals("Pitcher")){
+                    System.out.println(thisFreeAgent.getPlayerName()+" "+thisFreeAgent.getMlbTeam()+" "+thisFreeAgent.getPosition());
+                }
+            }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     private static void addTeam() {
@@ -224,13 +261,104 @@ public class Driver {
         System.out.println("Restoring...");
     }
 
-    private static void evalFun() {
-        System.out.println("EVALFUN...");
+    private static void evalFun() throws Exception {
+        try {
+            Scanner input = new Scanner(System.in);
+            System.out.print("\nPLEASE ENTER YOUR EVALUATION EXPRESSION: ");
+            String evaluationString = input.nextLine();
+            ExpressionBuilder eb = new ExpressionBuilder(evaluationString);
+
+            eb.variables("BA", "OBP", "AB", "SLG", "SB");
+    
+            Expression expression = eb.build();
+    
+            for(Player player : playerDB){
+                if(player.getPlayerType().equals("Batter")){
+                    expression.setVariable("BA", player.batterStats.getBA());
+                    expression.setVariable("OBP", player.batterStats.getOBP());
+                    expression.setVariable("AB", (double) player.batterStats.getAB());
+                    expression.setVariable("SLG", player.batterStats.getSLG());
+                    expression.setVariable("SB", (double) player.batterStats.getSB());
+        
+                    player.setEvaluationValue(expression.evaluate());
+                }
+        
+            }
+            for(Player player : freeAgents){
+                if(player.getPlayerType().equals("Batter")){
+                    expression.setVariable("BA", player.batterStats.getBA());
+                    expression.setVariable("OBP", player.batterStats.getOBP());
+                    expression.setVariable("AB", (double) player.batterStats.getAB());
+                    expression.setVariable("SLG", player.batterStats.getSLG());
+                    expression.setVariable("SB", (double) player.batterStats.getSB());
+        
+                    player.setEvaluationValue(expression.evaluate());
+                }
+        
+            }
+
+            evaluationSort();
+        } catch (ArithmeticException e){
+            System.out.println("! INVALID MATHEMATICAL EXPRESSION ENTERED !");
+        } catch (IllegalArgumentException e){
+            System.out.println("! INVALID STAT ENTRY, ONE OR MORE OF THE STATS YOU ARE LOOKING TO EVAL IS CURRENTLY UNSUPPORTED");
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    private static void evaluationSort(){
+        Collections.sort(playerDB, (p1, p2) -> Double.compare(p2.getEvaluationValue(), p1.getEvaluationValue()));
+        Collections.sort(freeAgents, (p1, p2) -> Double.compare(p2.getEvaluationValue(), p1.getEvaluationValue()));
     }
 
     private static void pevalFun() {
-        System.out.println("PEVALFUN...");
-    }
+        try {
+            Scanner input = new Scanner(System.in);
+            System.out.print("\nPLEASE ENTER YOUR EVALUATION EXPRESSION: ");
+            String evaluationString = input.nextLine();
+            ExpressionBuilder eb = new ExpressionBuilder(evaluationString);
+    
+            eb.variables("G", "GS", "ERA", "IP", "BB");
+    
+            Expression expression = eb.build();
+    
+            for(Player player : playerDB){
+                if(player.getPlayerType().equals("Pitcher")){
+                    expression.setVariable("G", (double) player.getG());
+                    expression.setVariable("GS", (double) player.pitcherStats.getGS());
+                    expression.setVariable("ERA", (double) player.pitcherStats.getERA());
+                    expression.setVariable("IP", player.pitcherStats.getIP());
+                    expression.setVariable("BB", (double) player.getBB());
+        
+                    player.setEvaluationValue(expression.evaluate());   
+                }
+        
+            }
+
+            for(Player player : freeAgents){
+                if(player.getPlayerType().equals("Pitcher")){
+                    expression.setVariable("G", (double) player.getG());
+                    expression.setVariable("GS", (double) player.pitcherStats.getGS());
+                    expression.setVariable("ERA", (double) player.pitcherStats.getERA());
+                    expression.setVariable("IP", player.pitcherStats.getIP());
+                    expression.setVariable("BB", (double) player.getBB());
+        
+                    player.setEvaluationValue(expression.evaluate());
+                }
+        
+            }
+    
+            evaluationSort();
+
+        } catch (ArithmeticException e){
+            System.out.println("! INVALID MATHEMATICAL EXPRESSION ENTERED !");
+        } catch (IllegalArgumentException e){
+            System.out.println("! INVALID STAT ENTRY, ONE OR MORE OF THE STATS YOU ARE LOOKING TO EVAL IS CURRENTLY UNSUPPORTED");
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+}
 
     private static void help() {
         System.out.println("HELP...");

@@ -215,6 +215,14 @@ public class Team {
 		draftRound++;
 	}
 
+	public boolean hasFullPitchingStaff(){
+		if(pitcher1 == null || pitcher2 == null || pitcher3 == null || pitcher4 == null || pitcher5 == null){
+			return false;
+		}else{
+			return true;
+		}
+	}
+
 	public boolean hasPosition(String pos){
 		switch(pos){
 			case "C":

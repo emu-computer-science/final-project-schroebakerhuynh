@@ -1,0 +1,11 @@
+{
+    "java.project.referencedLibraries": {
+        "include": [
+            "lib/**/*.jar",
+            "c:\\Users\\mackj\\Downloads\\exp4j-0.4.8.jar"
+        ],
+        "exclude": [
+            "lib/exp4j-0.4.8.jar"
+        ]
+    }
+}
