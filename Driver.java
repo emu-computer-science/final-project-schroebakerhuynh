@@ -93,7 +93,7 @@ public class Driver {
         scanner.close();
     }
     
-    private static void displayPlayers() {
+    public static void displayPlayers() {
   
         int pageSize = 20;
         int currentPage = 0;
@@ -107,7 +107,7 @@ public class Driver {
     
             for (int i = startIndex; i < endIndex; i++) {
                 Player player = playerDB.get(i);
-                System.out.println(player.playerType +" "+player.playerName+" "+player.position);
+                System.out.println(player.getPlayerType() + " " + player.getPlayerName() + " " + player.getPosition());
             }
     
             System.out.println("\nPage " + (currentPage + 1) + " of " + totalPages);
@@ -147,7 +147,7 @@ public class Driver {
         scanner.close();
     }
     
-    private static void searchPlayer() {
+    public static void searchPlayer() {
         Driver driver = new Driver();
         driver.readInPlayerFile(new File("mlb_al_batter_stats_2023.txt"), "Batter");
         driver.readInPlayerFile(new File("mlb_al_pitching_stats_2023.txt"), "Pitcher");
@@ -159,7 +159,7 @@ public class Driver {
         boolean playerFound = false;
         for (Player player : driver.playerDB) {
             if (player.getPlayerName().equalsIgnoreCase(playerNameToSearch)) {
-                System.out.println(player.playerType +" "+ player.playerName +" "+ player.position);
+                System.out.println(player.getPlayerType() + " " + player.getPlayerName() + " " + player.getPosition());
                 playerFound = true;
                 break;
             }
@@ -170,25 +170,25 @@ public class Driver {
         }
     }
 
-    private static void idraft() {
+    public static void idraft() {
         System.out.println("IDRAFT...");
     }
 
-    private static void odraft() {
+    public static void odraft() {
         System.out.println("ODRAFT...");
     }
 
-    private static void overall(String pos, Team thisTeam){
+    public static void overall(String pos, Team thisTeam){
         try {
             pos = pos.trim().toUpperCase();
             if(thisTeam.hasPosition(pos)){
                 throw new Exception("TEAM ALREADY CONTAINS A PLAYER OF THIS POSITION");
             }else{
                 for(Player thisFreeAgent : freeAgents){
-                    if(thisTeam.hasPosition(thisFreeAgent.position) || thisFreeAgent.playerType.equals("Pitcher")){
+                    if (thisTeam.hasPosition(thisFreeAgent.getPosition()) || thisFreeAgent.getPlayerType().equals("Pitcher")) {
                         continue;
                     }else{
-                        System.out.println(thisFreeAgent.playerName+" "+thisFreeAgent.mlbTeam+" "+thisFreeAgent.position);
+                        System.out.println(thisFreeAgent.getPlayerName() + " " + thisFreeAgent.getMlbTeam() + " " + thisFreeAgent.getPosition());
                     }
                 }
             }
@@ -197,17 +197,17 @@ public class Driver {
         }
     }
 
-    private static void poverall(String pos, Team thisTeam){
+    public static void poverall(String pos, Team thisTeam){
         try {
             pos = pos.trim().toUpperCase();
             if(thisTeam.hasPosition(pos)){
                 throw new Exception("TEAM ALREADY CONTAINS A PLAYER OF THIS POSITION");
             }else{
                 for(Player thisFreeAgent : freeAgents){
-                    if(thisFreeAgent.playerType.equals("Pitcher")){
+                    if(thisFreeAgent.getPlayerType().equalsIgnoreCase("Pitcher")){
                         continue;
                     }else{
-                        System.out.println(thisFreeAgent.playerName+" "+thisFreeAgent.mlbTeam+" "+thisFreeAgent.position);
+                        System.out.println(thisFreeAgent.getPlayerName() + " " + thisFreeAgent.getMlbTeam() + " " + thisFreeAgent.getPosition());
                     }
                 }
             }
@@ -216,39 +216,39 @@ public class Driver {
         }
     }
 
-    private static void addTeam() {
+    public static void addTeam() {
         System.out.println("Adding a Team...");
     }
 
-    private static void displayTeam() {
+    public static void displayTeam() {
         System.out.println("Displaying Teams...");
     }
     
-    private static void save() {
+    public static void save() {
         System.out.println("Saving data...");
     }
 
-    private static void load() {
+    public static void load() {
         System.out.println("Loading data...");
     }
 
-    private static void quit() {
+    public static void quit() {
         System.out.println("Quitting: Goodbye ...");
     }
 
-    private static void restore() {
+    public static void restore() {
         System.out.println("Restoring...");
     }
 
-    private static void evalFun() {
+    public static void evalFun() {
         System.out.println("EVALFUN...");
     }
 
-    private static void pevalFun() {
+    public static void pevalFun() {
         System.out.println("PEVALFUN...");
     }
 
-    private static void help() {
+    public static void help() {
         System.out.println("HELP...");
     }
 
