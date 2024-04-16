@@ -11,6 +11,7 @@ public class Player{
     private String mlbTeam;
     private String fantasyTeam;
     private int draftPosition;
+    private double evaluationValue = 0;
     private int G;
     private int H;
     private int HR;
@@ -223,5 +224,13 @@ public class Player{
 
     public int getDraftPosition() {                     //added by Adam 4/7/24
     	return draftPosition;
+    }
+
+    public void setEvaluationValue(double newEvalVal){
+        this.evaluationValue = newEvalVal;
+    }
+
+    public double getEvaluationValue(){
+        return this.evaluationValue;
     }
 }
