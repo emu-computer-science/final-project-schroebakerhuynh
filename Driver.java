@@ -32,14 +32,14 @@ public class Driver {
                     break;
                 case "IDRAFT":
                     if (parts.length == 2) {
-                        idraft(parts[1]);
+                        //idraft(parts[1]);
                     } else {
                         System.out.println("Invalid command. Please specify a player name.");
                     }
                     break;
                 case "ODRAFT":
                     if (parts.length == 2) {
-                        odraft(parts[1]);
+                        //odraft(parts[1]);
                     } else {
                         System.out.println("Invalid command. Please specify a player name and team.");
                     }
@@ -63,9 +63,6 @@ public class Driver {
                 case "ADD TEAM":
                     addTeam();
                     break;
-                case "DISPLAY":
-                    displayTeam();
-                    break;
                 case "SAVE":
                     save();
                     break;
@@ -75,9 +72,6 @@ public class Driver {
                 case "QUIT":
                     quit();
                     running = false;
-                    break;
-                case "RESTORE":
-                    restore();
                     break;
                 case "EVALFUN":
                     evalFun();
@@ -223,25 +217,58 @@ public class Driver {
     public static void addTeam() {
         System.out.println("Adding a Team...");
     }
-
-    public static void displayTeam() {
-        System.out.println("Displaying Teams...");
-    }
     
     public static void save() {
-        System.out.println("Saving data...");
+        try (PrintWriter batterWriter = new PrintWriter("batter_data.txt");
+             PrintWriter pitcherWriter = new PrintWriter("pitcher_data.txt")) {
+            
+            // Save batter data
+            for (Player player : playerDB) {
+                if (player.getPlayerType().equals("Batter")) {
+                    batterWriter.println(player.getPlayerType() + "," + player.getPlayerName() + "," + player.getPosition());
+                }
+            }
+            
+            // Save pitcher data
+            for (Player player : playerDB) {
+                if (player.getPlayerType().equals("Pitcher")) {
+                    pitcherWriter.println(player.getPlayerType() + "," + player.getPlayerName() + "," + player.getPosition());
+                }
+            }
+            
+            System.out.println("Data saved successfully.");
+        } catch (IOException e) {
+            System.out.println("Error saving data: " + e.getMessage());
+        }
     }
-
+    
     public static void load() {
-        System.out.println("Loading data...");
-    }
+        try (BufferedReader batterReader = new BufferedReader(new FileReader("batter_data.txt"));
+             BufferedReader pitcherReader = new BufferedReader(new FileReader("pitcher_data.txt"))) {
+            
+            playerDB.clear(); // Clear existing data
+            
+            // Load batter data
+            String line;
+            while ((line = batterReader.readLine()) != null) {
+                String[] parts = line.split(",");
+                playerDB.add(new Player(parts, "Batter")); // Assuming Player constructor takes an array and a player type
+            }
+            
+            // Load pitcher data
+            while ((line = pitcherReader.readLine()) != null) {
+                String[] parts = line.split(",");
+                playerDB.add(new Player(parts, "Pitcher")); // Assuming Player constructor takes an array and a player type
+            }
+            
+            System.out.println("Data loaded successfully.");
+        } catch (IOException e) {
+            System.out.println("Error loading data: " + e.getMessage());
+        }
+    }  
 
     public static void quit() {
         System.out.println("Quitting: Goodbye ...");
-    }
-
-    public static void restore() {
-        System.out.println("Restoring...");
     }
 
     public static void evalFun() {
@@ -265,7 +292,6 @@ public class Driver {
         System.out.println("Save");
         System.out.println("Load");
         System.out.println("Quit");
-        System.out.println("Restore");
         System.out.println("Evalfun");
         System.out.println("Pevealfun");
         System.out.println("Help");
