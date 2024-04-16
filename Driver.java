@@ -240,13 +240,104 @@ public class Driver {
         System.out.println("Restoring...");
     }
 
-    public static void evalFun() {
-        System.out.println("EVALFUN...");
+    private static void evalFun() throws Exception {
+        try {
+            Scanner input = new Scanner(System.in);
+            System.out.print("\nPLEASE ENTER YOUR EVALUATION EXPRESSION: ");
+            String evaluationString = input.nextLine();
+            ExpressionBuilder eb = new ExpressionBuilder(evaluationString);
+
+            eb.variables("BA", "OBP", "AB", "SLG", "SB");
+    
+            Expression expression = eb.build();
+    
+            for(Player player : playerDB){
+                if(player.getPlayerType().equals("Batter")){
+                    expression.setVariable("BA", player.batterStats.getBA());
+                    expression.setVariable("OBP", player.batterStats.getOBP());
+                    expression.setVariable("AB", (double) player.batterStats.getAB());
+                    expression.setVariable("SLG", player.batterStats.getSLG());
+                    expression.setVariable("SB", (double) player.batterStats.getSB());
+        
+                    player.setEvaluationValue(expression.evaluate());
+                }
+        
+            }
+            for(Player player : freeAgents){
+                if(player.getPlayerType().equals("Batter")){
+                    expression.setVariable("BA", player.batterStats.getBA());
+                    expression.setVariable("OBP", player.batterStats.getOBP());
+                    expression.setVariable("AB", (double) player.batterStats.getAB());
+                    expression.setVariable("SLG", player.batterStats.getSLG());
+                    expression.setVariable("SB", (double) player.batterStats.getSB());
+        
+                    player.setEvaluationValue(expression.evaluate());
+                }
+        
+            }
+
+            evaluationSort();
+        } catch (ArithmeticException e){
+            System.out.println("! INVALID MATHEMATICAL EXPRESSION ENTERED !");
+        } catch (IllegalArgumentException e){
+            System.out.println("! INVALID STAT ENTRY, ONE OR MORE OF THE STATS YOU ARE LOOKING TO EVAL IS CURRENTLY UNSUPPORTED");
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
     }
 
-    public static void pevalFun() {
-        System.out.println("PEVALFUN...");
+    private static void evaluationSort(){
+        Collections.sort(playerDB, (p1, p2) -> Double.compare(p2.getEvaluationValue(), p1.getEvaluationValue()));
+        Collections.sort(freeAgents, (p1, p2) -> Double.compare(p2.getEvaluationValue(), p1.getEvaluationValue()));
     }
+
+    private static void pevalFun() {
+        try {
+            Scanner input = new Scanner(System.in);
+            System.out.print("\nPLEASE ENTER YOUR EVALUATION EXPRESSION: ");
+            String evaluationString = input.nextLine();
+            ExpressionBuilder eb = new ExpressionBuilder(evaluationString);
+    
+            eb.variables("G", "GS", "ERA", "IP", "BB");
+    
+            Expression expression = eb.build();
+    
+            for(Player player : playerDB){
+                if(player.getPlayerType().equals("Pitcher")){
+                    expression.setVariable("G", (double) player.getG());
+                    expression.setVariable("GS", (double) player.pitcherStats.getGS());
+                    expression.setVariable("ERA", (double) player.pitcherStats.getERA());
+                    expression.setVariable("IP", player.pitcherStats.getIP());
+                    expression.setVariable("BB", (double) player.getBB());
+        
+                    player.setEvaluationValue(expression.evaluate());   
+                }
+        
+            }
+
+            for(Player player : freeAgents){
+                if(player.getPlayerType().equals("Pitcher")){
+                    expression.setVariable("G", (double) player.getG());
+                    expression.setVariable("GS", (double) player.pitcherStats.getGS());
+                    expression.setVariable("ERA", (double) player.pitcherStats.getERA());
+                    expression.setVariable("IP", player.pitcherStats.getIP());
+                    expression.setVariable("BB", (double) player.getBB());
+        
+                    player.setEvaluationValue(expression.evaluate());
+                }
+        
+            }
+    
+            evaluationSort();
+
+        } catch (ArithmeticException e){
+            System.out.println("! INVALID MATHEMATICAL EXPRESSION ENTERED !");
+        } catch (IllegalArgumentException e){
+            System.out.println("! INVALID STAT ENTRY, ONE OR MORE OF THE STATS YOU ARE LOOKING TO EVAL IS CURRENTLY UNSUPPORTED");
+        } catch (Exception e){
+            System.out.println(e.getMessage());
+        }
+}
 
     public static void help() {
         System.out.println("HELP...");
