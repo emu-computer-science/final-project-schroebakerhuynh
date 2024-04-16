@@ -5,37 +5,25 @@ import java.nio.charset.*;
 public class Driver {
     public static ArrayList<Player> playerDB = new ArrayList<Player>();
     public static ArrayList<Player> freeAgents = new ArrayList<Player>();
+    public static Scanner scanner = new Scanner(System.in); // Declare scanner as a class-level variable
     
     public static void main(String[] args) {
         Driver driver = new Driver();
         driver.readInPlayerFile(new File("mlb_al_batter_stats_2023.txt"), "Batter");
         driver.readInPlayerFile(new File("mlb_al_pitching_stats_2023.txt"), "Pitcher");
-        Scanner scanner = new Scanner(System.in);
+        
+        help();
+        
         boolean running = true;
         
         while (running) {
-            // Display main menu
-            System.out.println("Main Menu:");
-            System.out.println("Display Players");
-            System.out.println("Search Player");
-            System.out.println("IDRAFT");
-            System.out.println("ODRAFT");
-            System.out.println("OVERALL");
-            System.out.println("POVERALL");
-            System.out.println("Add Team");
-            System.out.println("Display Teams");
-            System.out.println("Save");
-            System.out.println("Load");
-            System.out.println("Quit");
-            System.out.println("Restore");
-            System.out.println("Evalfun");
-            System.out.println("Pevealfun");
-            System.out.println("Help");
-            System.out.print("\nEnter your choice: ");
+            System.out.print("\nEnter a command: ");
+            String input = scanner.nextLine(); // Read the command and its arguments
+            String[] parts = input.split(" ", 2); // Split the input into command and arguments
             
-            String choice = scanner.nextLine();
+            String command = parts[0].toUpperCase(); // Get the command
             
-            switch (choice.toUpperCase()) {
+            switch (command) {
                 case "DISPLAY PLAYERS":
                     displayPlayers();
                     break;
@@ -43,23 +31,39 @@ public class Driver {
                     searchPlayer();
                     break;
                 case "IDRAFT":
-                    Team.iDraft();
+                    if (parts.length == 2) {
+                        idraft(parts[1]);
+                    } else {
+                        System.out.println("Invalid command. Please specify a player name.");
+                    }
                     break;
                 case "ODRAFT":
-                    Team.oDraft();
+                    if (parts.length == 2) {
+                        odraft(parts[1]);
+                    } else {
+                        System.out.println("Invalid command. Please specify a player name and team.");
+                    }
                     break;
                 case "OVERALL":
-                    Team thisTeam = new Team();
-                    overall("C", thisTeam);
+                    if (parts.length == 2) {
+                        Team thisTeam = new Team();
+                        overall(parts[1], thisTeam);
+                    } else {
+                        System.out.println("Invalid command. Please specify a position.");
+                    }
                     break;
                 case "POVERALL":
-                    Team thisTeamPoverall = new Team();
-                    poverall("C", thisTeamPoverall);
+                    if (parts.length == 2) {
+                        Team thisTeamPoverall = new Team();
+                        poverall(parts[1], thisTeamPoverall);
+                    } else {
+                        System.out.println("Invalid command. Please specify a position.");
+                    }
                     break;
                 case "ADD TEAM":
-                    Team myTeam = new Team();;
+                    addTeam();
                     break;
-                case "DISPLAY TEAMS":
+                case "DISPLAY":
                     displayTeam();
                     break;
                 case "SAVE":
@@ -85,7 +89,7 @@ public class Driver {
                     help();
                     break;
                 default:
-                    System.out.println("Invalid choice. Please try again.");
+                    System.out.println("Invalid command. Please try again or type 'HELP' for available commands.");
                     break;
             }
         }
@@ -249,7 +253,22 @@ public class Driver {
     }
 
     public static void help() {
-        System.out.println("HELP...");
+        System.out.println("Main Menu:");
+        System.out.println("Display Players");
+        System.out.println("Search Player");
+        System.out.println("IDRAFT");
+        System.out.println("ODRAFT");
+        System.out.println("OVERALL");
+        System.out.println("POVERALL");
+        System.out.println("Add Team");
+        System.out.println("Display Teams");
+        System.out.println("Save");
+        System.out.println("Load");
+        System.out.println("Quit");
+        System.out.println("Restore");
+        System.out.println("Evalfun");
+        System.out.println("Pevealfun");
+        System.out.println("Help");
     }
 
     public void readInPlayerFile(File playerFile, String playerType){
@@ -267,4 +286,5 @@ public class Driver {
         }
 	}
 }
+
 
