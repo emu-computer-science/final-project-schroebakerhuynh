@@ -215,7 +215,7 @@ public class Team {
 		draftRound++;
 	}
 
-	public boolean hasPosition(String pos){
+	public static boolean hasPosition(String pos){
 		switch(pos){
 			case "C":
 				if(catcher == null){
