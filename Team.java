@@ -207,15 +207,15 @@ public class Team {
 	}//end of iDraft
 	
 	//method to release a player as a Free Agent
-	public void release() {
+	public static void release() {
 		System.out.println("Player released");
 	}
 	
-	public void endRound() {
+	public static void endRound() {
 		draftRound++;
 	}
 
-	public boolean hasPosition(String pos){
+	public static boolean hasPosition(String pos){
 		switch(pos){
 			case "C":
 				if(catcher == null){
@@ -268,6 +268,18 @@ public class Team {
 			default:
 				return false;	
 		}
+	}
+	
+	public static int displayDraftRound() {
+		return draftRound;
+	}
+	
+	public static String getTeamName() {
+		return teamName;
+	}
+	
+	public static void setTeamName(String string) {
+		teamName = string;
 	}
 	
 	
