@@ -8,9 +8,8 @@ public class Driver {
     public static ArrayList<Player> freeAgents = new ArrayList<Player>();
     
     public static void main(String[] args) {
-        Driver driver = new Driver();
-        driver.readInPlayerFile(new File("mlb_al_batter_stats_2023.txt"), "Batter");
-        driver.readInPlayerFile(new File("mlb_al_pitching_stats_2023.txt"), "Pitcher");
+        readInPlayerFile(new File("final-project-schroebakerhuynh\\player_stats\\mlb_al_batter_stats_2023.txt"), "Batter");
+        readInPlayerFile(new File("final-project-schroebakerhuynh\\player_stats\\mlb_al_pitching_stats_2023.txt"), "Pitcher");
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
         
@@ -77,7 +76,12 @@ public class Driver {
                     restore();
                     break;
                 case "EVALFUN":
-                    evalFun();
+                    try {
+                        evalFun();
+                    } catch (Exception e) {
+                        // TODO Auto-generated catch block
+                        e.printStackTrace();
+                    }
                     break;
                 case "PEVALFUN":
                     pevalFun();
@@ -149,16 +153,13 @@ public class Driver {
     }
     
     public static void searchPlayer() {
-        Driver driver = new Driver();
-        driver.readInPlayerFile(new File("mlb_al_batter_stats_2023.txt"), "Batter");
-        driver.readInPlayerFile(new File("mlb_al_pitching_stats_2023.txt"), "Pitcher");
-    
+   
         Scanner scanner = new Scanner(System.in);
         System.out.println("Enter the name of the player you want to search for:");
         String playerNameToSearch = scanner.nextLine();
     
         boolean playerFound = false;
-        for (Player player : driver.playerDB) {
+        for (Player player : playerDB) {
             if (player.getPlayerName().equalsIgnoreCase(playerNameToSearch)) {
                 System.out.println(player.getPlayerType() + " " + player.getPlayerName() + " " + player.getPosition());
                 playerFound = true;
@@ -182,11 +183,11 @@ public class Driver {
     public static void overall(String pos, Team thisTeam){
         try {
             pos = pos.trim().toUpperCase();
-            if(thisTeam.hasPosition(pos)){
+            if(Team.hasPosition(pos)){
                 throw new Exception("TEAM ALREADY CONTAINS A PLAYER OF THIS POSITION");
             }else{
                 for(Player thisFreeAgent : freeAgents){
-                    if (thisTeam.hasPosition(thisFreeAgent.getPosition()) || thisFreeAgent.getPlayerType().equals("Pitcher")) {
+                    if (Team.hasPosition(thisFreeAgent.getPosition()) || thisFreeAgent.getPlayerType().equals("Pitcher")) {
                         continue;
                     }else{
                         System.out.println(thisFreeAgent.getPlayerName() + " " + thisFreeAgent.getMlbTeam() + " " + thisFreeAgent.getPosition());
@@ -201,7 +202,7 @@ public class Driver {
     public static void poverall(String pos, Team thisTeam){
         try {
             pos = pos.trim().toUpperCase();
-            if(thisTeam.hasPosition(pos)){
+            if(Team.hasPosition(pos)){
                 throw new Exception("TEAM ALREADY CONTAINS A PLAYER OF THIS POSITION");
             }else{
                 for(Player thisFreeAgent : freeAgents){
@@ -344,7 +345,7 @@ public class Driver {
         System.out.println("HELP...");
     }
 
-    public void readInPlayerFile(File playerFile, String playerType){
+    public static void readInPlayerFile(File playerFile, String playerType){
 		try {
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(playerFile), StandardCharsets.UTF_8));
             String line = br.readLine();
