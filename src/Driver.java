@@ -1,3 +1,10 @@
+/*
+ * Programmer: Team 1 (Adam Schroeder, Brandon Huyhn, Mack Baker)
+ * Project:    Final Project - Fantasy Baseball
+ * Course:     COSC 381, Sp '24
+ *  
+ */
+
 import java.io.*;
 import java.util.*;
 import java.util.ArrayList;

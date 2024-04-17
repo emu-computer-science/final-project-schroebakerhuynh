@@ -1,3 +1,9 @@
+/*
+ * Programmer: Team 1 (Adam Schroeder, Brandon Huyhn, Mack Baker)
+ * Project:    Final Project - Fantasy Baseball
+ * Course:     COSC 381, Sp '24
+ *  
+ */
 
 public class Player{
     
