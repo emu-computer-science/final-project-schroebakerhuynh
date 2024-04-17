@@ -62,6 +62,15 @@ public class Player{
         }
     }
 
+    /* 
+    * PROGRAMMER: Mack Baker
+    * generatePosition()
+    * generate player position based on "position summary" data from player file
+    *
+    *
+    * @param positonSummary
+    * @return String 
+    */	
     public String generatePosition(String positionSummary){
         for(int i = 0; i < positionSummary.length()-1; i++){
             if(isInteger(positionSummary.substring(i, i+1))){
@@ -93,6 +102,14 @@ public class Player{
         return "ERROR";
     }
 
+
+    /* 
+    * PROGRAMMER: Mack Baker
+    * isInteger()
+    * 
+    * 
+    * @param str
+    */	
     public boolean isInteger(String str){
         try {
             Integer.parseInt(str);

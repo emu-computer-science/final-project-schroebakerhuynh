@@ -50,6 +50,8 @@ public class PitcherStats {
         this.SOperW = line[33].isEmpty() ? 0 : Double.valueOf(line[33]);
     }
 
+    //GETTERS + SETTERS
+
     public int getW() throws Exception{
         return this.W;
     }

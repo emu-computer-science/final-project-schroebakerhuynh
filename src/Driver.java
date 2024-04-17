@@ -7,14 +7,16 @@ import net.objecthunter.exp4j.*;
 public class Driver{
     //ArrayList to act as a database for all players
     public static ArrayList<Player> playerDB = new ArrayList<Player>();
+
+    //Create the four teams
     public static Team teamA = new Team("Team A");
     public static Team teamB = new Team("Team B");
     public static Team teamC = new Team("Team C");
     public static Team teamD = new Team("Team D");
+
+    //Initialize draftCounter
     public static int draftCounter = 1;
 
-    //ArrayList to act as a database for freeAgents, pick from for draft
-    // public static ArrayList<Player> freeAgents = new ArrayList<Player>();
    
     public static void main(String[] args) throws Exception {
         //Read in the batter and pitchers
@@ -42,6 +44,7 @@ public class Driver{
             System.out.println("QUIT");
             System.out.print("\nEnter your choice: ");
             
+            //Read in user choice
             String choice = scanner.nextLine();
             
             switch (choice.toUpperCase()) {
@@ -93,6 +96,14 @@ public class Driver{
         scanner.close();
     }
 
+
+    /* 
+     * PROGRAMMER: BRANDON HUYHN
+     * save()
+     * Method that saves state of program to a file --> "saved_state.txt"
+     * 
+     * 
+    */
     public static void save() {
         try (PrintWriter writer = new PrintWriter(new FileWriter("saved_state.txt"))) {
             // Writing drafted player names for each team
@@ -123,6 +134,13 @@ public class Driver{
         }
     }
 
+    /* 
+     * PROGRAMMER: BRANDON HUYHN
+     * restore()
+     * Restores the program state from "saved_state.txt"
+     * 
+     * 
+    */
     public static void restore() {
     try (BufferedReader reader = new BufferedReader(new FileReader("saved_state.txt"))) {
         String line;
@@ -185,12 +203,11 @@ public class Driver{
 
 
     /* 
-     * PROGRAMMER: BRANDON HUYHN + MACK BAKER
+     * PROGRAMMER: BRANDON HUYHN
      * help()
-     * Parses a comma-separated .txt file consisting of baseball players and turns it into an ArrayList based database
+     * Displays a brief description of each command
      * 
-     * @param file to read in
-     * @param the type of player ("Batter" or "Pitcher")
+     * 
     */
     public static void help(){
         System.out.println();
@@ -225,8 +242,11 @@ public class Driver{
 		try {
             BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(playerFile), StandardCharsets.UTF_8));
             String line = br.readLine();
+            //Line = next line of player stats
             while((line = br.readLine()) != null){
+                //Split to string array
                 String[] thisPlayerStats = line.split(",");
+                //Utilize array to construct player and add to playerDB
                 playerDB.add(new Player(thisPlayerStats, playerType));
             }
             br.close();
@@ -306,17 +326,23 @@ public class Driver{
     */
     private static void evalFun(){
         try {
+            //Get evaluation input from user
             Scanner input = new Scanner(System.in);
             System.out.print("\nPLEASE ENTER YOUR EVALUATION EXPRESSION: ");
             String evaluationString = input.nextLine();
+
+            //Construct ExpressionBuilder from eval string
             ExpressionBuilder eb = new ExpressionBuilder(evaluationString);
 
+
+            //Set variables
             eb.variables("BA", "OBP", "AB", "SLG", "SB");
     
             Expression expression = eb.build();
     
             for(Player player : playerDB){
                 if(player.getPlayerType().equals("Batter")){
+                    //get variables
                     expression.setVariable("BA", player.batterStats.getBA());
                     expression.setVariable("OBP", player.batterStats.getOBP());
                     expression.setVariable("AB", (double) player.batterStats.getAB());
@@ -342,7 +368,7 @@ public class Driver{
     /* 
      * PROGRAMMER: MACK BAKER
      * evaluationSort()
-     * Sorts both the playerDB and the freeAgents DB based on objects' evalVal
+     * Sorts both the playerDB and the freeAgents DB based on objects' evalVal, descending order
     */
     private static void evaluationSort(){
         Collections.sort(playerDB, (p1, p2) -> Double.compare(p2.getEvaluationValue(), p1.getEvaluationValue()));
@@ -358,17 +384,22 @@ public class Driver{
     */
     private static void pevalFun() {
         try {
+            //Get evaluation expression from user
             Scanner input = new Scanner(System.in);
             System.out.print("\nPLEASE ENTER YOUR EVALUATION EXPRESSION: ");
             String evaluationString = input.nextLine();
+
+            //Build ExpressionBuilder from eval string
             ExpressionBuilder eb = new ExpressionBuilder(evaluationString);
     
+            //Set variables
             eb.variables("G", "GS", "ERA", "IP", "BB");
     
             Expression expression = eb.build();
     
             for(Player player : playerDB){
                 if(player.getPlayerType().equals("Pitcher")){
+                    //Get variables
                     expression.setVariable("G", (double) player.getG());
                     expression.setVariable("GS", (double) player.pitcherStats.getGS());
                     expression.setVariable("ERA", (double) player.pitcherStats.getERA());
@@ -392,12 +423,13 @@ public class Driver{
     }
 
     /* 
-     * PROGRAMMER: MACK BAKER
+     * PROGRAMMER: ANDREW SCHROEDER + MACK BAKER
      * displayTeam()
-     * Asks user for team to display and displays said team
+     * Asks user for team to display and displays said team by positon
      * 
     */
     public static void displayTeam(){
+        //Get team input from user
         Scanner input = new Scanner(System.in);
         System.out.print("\nEnter the team you wish to display (A,B,C,D): ");
         String name = input.nextLine();
@@ -419,7 +451,14 @@ public class Driver{
         }
     }
 
+    /* 
+     * PROGRAMMER: MACK BAKER
+     * displayTeamStars()
+     * Asks user for team to display and displays said team by draft positon
+     * 
+    */
     public static void displayTeamStars(){
+        //Get team input from user
         Scanner input = new Scanner(System.in);
         System.out.print("\nEnter the team you wish to display (A,B,C,D): ");
         String name = input.nextLine();
@@ -444,15 +483,19 @@ public class Driver{
     /* 
      * PROGRAMMER: ANDREW SCHROEDER + MACK BAKER
      * iDraft()
-     * 
+     * Shortcut draft method that drafts player to client team (TEAM A)
      * 
     */
     public static void iDraft() {
         Scanner input = new Scanner(System.in);
         System.out.print("\nEnter player name you wish to draft: ");
+        //Get name of player from user
         boolean playerFound = false;
         String nameInput = input.nextLine();
+
+        //Search for user based off name
         searchDBLoop: for(Player player : playerDB){
+            //If user is not a free agent
             if(nameInput.toLowerCase().equals(player.getPlayerName().toLowerCase())){
                 if(!(player.getFantasyTeam().equals("FreeAgent"))){
                     System.out.println("=========================ERROR=========================");
@@ -461,6 +504,7 @@ public class Driver{
                     return;
                 }
                 switch(player.getPlayerType()){
+                    //Found player is a pitcher
                     case "Pitcher":
                         if(teamA.hasFullPitchingStaff()){
                             System.out.println("====================================ERROR=======================================");
@@ -473,6 +517,7 @@ public class Driver{
                             playerFound = true;
                             break searchDBLoop;
                         }
+                    //Found player is a batter    
                     case "Batter":
                         if(teamA.hasPosition(player.getPosition())){
                             System.out.println("=========================================ERROR===========================================");
@@ -500,16 +545,21 @@ public class Driver{
     /* 
      * PROGRAMMER: ANDREW SCHROEDER + MACK BAKER
      * oDraft()
-     * 
+     * Draft player to a specific team, both gotten from user input
      * 
     */
     public static void oDraft() {
         Scanner input = new Scanner(System.in);
         boolean playerFound = false;
+        //Get the name of the player you wish to draft
         System.out.print("\nEnter player name you wish to draft: ");
         String name = input.nextLine();
-        System.out.print("\nEnter the name of the team the player should be drafted to: ");
+
+        //Enter the name of the tema to draft to
+        System.out.print("\nEnter the name of the team the player should be drafted to (A,B,C,D): ");
         String teamToDraftTo = input.nextLine();
+
+        //Create a team object to act as a pointer, teamPointer = teamPt
         Team teamPt = null;
         switch(teamToDraftTo.toUpperCase()){
             case "A":
@@ -529,7 +579,10 @@ public class Driver{
                 return;
             
         }
+
+        //Search for player in playerDB based off name
         searchDBLoop: for(Player player : playerDB){
+            //Player found and is a free agent
             if(name.toLowerCase().equals(player.getPlayerName().toLowerCase())){
                 if(!(player.getFantasyTeam().equals("FreeAgent"))){
                     System.out.println("=========================ERROR=========================");
@@ -538,6 +591,7 @@ public class Driver{
                     return;
                 }
                 switch(player.getPlayerType()){
+                    //Player found, is not a free agent, and is a pitcher
                     case "Pitcher":
                         if(teamPt.hasFullPitchingStaff()){
                             System.out.println("====================================ERROR=======================================");
@@ -550,6 +604,7 @@ public class Driver{
                             playerFound = true;
                             break searchDBLoop;
                         }
+                    //Player found is not a free agent, and is a batter
                     case "Batter":
                         if(teamPt.hasPosition(player.getPosition())){
                             System.out.println("=========================================ERROR===========================================");
@@ -579,14 +634,16 @@ public class Driver{
     /* 
      * PROGRAMMER: MACK BAKER
      * overall()
-     * 
+     * Displays players in playerDB orderd by evaluation value and if team A does not have player of that position and that player is not a free agent
      * 
     */
     public static void overall(){
         try {
             Scanner input = new Scanner(System.in);
+            //Get user input for positon or for all batters
             System.out.print("\nEnter position or 'all' for all batters: ");
             String pos = input.nextLine().trim().toUpperCase();
+            //User input is ALL then display all
             if(pos.equals("ALL")){
                 for(Player player: playerDB){
                     if(teamA.hasPosition(player.getPosition()) || !(player.getFantasyTeam().equals("FreeAgent")) || player.getPlayerType().equals("Pitcher")){
@@ -599,6 +656,7 @@ public class Driver{
                     }
                 }
             } else{
+                //Else not ALL but teamA has position
                 if(teamA.hasPosition(pos)){
                     System.out.println("=====================ERROR=====================");
                     System.out.println("Your team already has a player of this position");
@@ -627,10 +685,11 @@ public class Driver{
     /* 
      * PROGRAMMER: MACK BAKER
      * pOverall()
-     * 
+     * Same as overall but for pitchers
      * 
     */
     public static void pOverall(){
+        //If teamA has a full pitching staff
         if(teamA.hasFullPitchingStaff()){
             System.out.println("============================ERROR===========================");
             System.out.println("Your team already has a full pitching staff of this position");
@@ -638,6 +697,7 @@ public class Driver{
             return;
         }else{
             for(Player player : playerDB){
+                //else if player found is not a pitcher or is not a free agent 
                 if(!(player.getPlayerType().equals("Pitcher")) || !(player.getFantasyTeam().equals("FreeAgent"))){
                     continue;
                 }else{

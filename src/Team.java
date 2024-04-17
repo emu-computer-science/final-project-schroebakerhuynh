@@ -1,5 +1,5 @@
 /*
- * Programmer: Adam Schroeder
+ * Programmer: Team 1 (Adam Schroeder, Brandon Huyhn, Mack Baker)
  * Project:    Final Project - Fantasy Baseball
  * Course:     COSC 381, Sp '24
  *  
@@ -52,6 +52,14 @@ public class Team {
 			
 		}
 
+
+		/* 
+		* PROGRAMMER: Mack Baker
+		* hasFullPitchingStaff()
+		* 
+		* 
+		* 
+   		 */
 		public boolean hasFullPitchingStaff(){
 			if(this.pitcher1 == null || this.pitcher2 == null || this.pitcher3 == null || this.pitcher4 == null || this.pitcher5 == null){
 				return false;
@@ -60,6 +68,13 @@ public class Team {
 			}
 		}
 
+		/* 
+		* PROGRAMMER: Mack Baker
+		* hasFullPosition()
+		* 
+		* 
+		* 
+   		 */
 		public boolean hasPosition(String pos){
 			switch(pos){
 				case "C":
@@ -115,6 +130,14 @@ public class Team {
 			}
 		}
 
+
+		/* 
+		* PROGRAMMER: Mack Baker
+		* addPitcher()
+		* 
+		* 
+		* 
+   		 */
 		public void addPitcher(Player player, int draftCounter){
 			if(this.pitcher1 == null){
 				this.pitcher1 = player;
@@ -132,6 +155,14 @@ public class Team {
 			player.setDraftPosition(draftCounter);
 		}
 
+
+		/* 
+		* PROGRAMMER: Mack Baker
+		* addPlayer()
+		* 
+		* 
+		* 
+   		 */
 		public void addPlayer(Player player, int draftCounter){
 			switch(player.getPosition()){
 				case "C":
@@ -187,6 +218,14 @@ public class Team {
 			}
 		}
 
+
+		/* 
+		* PROGRAMMER: Mack Baker
+		* displayTeam()
+		* 
+		* 
+		* 
+   		 */		
 		public void displayTeam(){
 			System.out.println("TEAM: "+this.teamName);
 			System.out.println("C: " + (this.catcher != null ? this.catcher.getPlayerName() : "N/A"));
@@ -205,6 +244,14 @@ public class Team {
 			
 		}
 
+
+		/* 
+		* PROGRAMMER: Mack Baker
+		* stars()
+		* 
+		* 
+		* 
+   		 */	
 		public void stars(){
 			this.reorderForStars();
 			System.out.println("TEAM: "+this.teamName);
@@ -217,6 +264,13 @@ public class Team {
 			}
 		}
 
+		/* 
+		* PROGRAMMER: Mack Baker
+		* reorderForStars()
+		* 
+		* 
+		* 
+   		 */	
 		public void reorderForStars(){
 			Collections.sort(this.roster, (p1, p2) -> Integer.compare(p1.getDraftPosition(), p2.getDraftPosition()));
 		}

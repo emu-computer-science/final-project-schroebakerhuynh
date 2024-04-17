@@ -17,10 +17,11 @@ public class BatterStats {
     private int SH;
     private int SF;
     
-
+    //Blank constructor
     public BatterStats(){
     }
 
+    //Constructor with line of stats
     public BatterStats(String[] line){
         this.PA = line[5].isEmpty() ? 0 : Integer.valueOf(line[5]);
         this.AB = line[6].isEmpty() ? 0 : Integer.valueOf(line[6]);
@@ -40,8 +41,7 @@ public class BatterStats {
         this.SF = line[26].isEmpty() ? 0 : Integer.valueOf(line[26]);
     }
 
-    //BATTER SPECIFIC
-
+    //GETTERS + SETTERS
     public int getPA() throws Exception {
         return this.PA;
     }
