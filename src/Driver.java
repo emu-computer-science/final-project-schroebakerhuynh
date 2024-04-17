@@ -360,6 +360,7 @@ public class Driver{
     public static void iDraft(){
         Scanner input = new Scanner(System.in);
         System.out.print("\nEnter player name you wish to draft: ");
+        boolean playerFound = false;
         String nameInput = input.nextLine();
         searchDBLoop: for(Player player : playerDB){
             if(nameInput.toLowerCase().equals(player.getPlayerName().toLowerCase())){
@@ -379,6 +380,7 @@ public class Driver{
                         }else{
                             teamA.addPitcher(player, draftCounter);
                             nameInput = player.getPlayerName();
+                            playerFound = true;
                             break searchDBLoop;
                         }
                     case "Batter":
@@ -390,6 +392,7 @@ public class Driver{
                         }else{
                             teamA.addPlayer(player, draftCounter);
                             nameInput = player.getPlayerName();
+                            playerFound = true;
                             break searchDBLoop;
                         }
                     default:
@@ -397,9 +400,12 @@ public class Driver{
                 }
             }
         }
-       
-        System.out.println(nameInput+" has been drafted to Team A");
-        draftCounter++;
+        if(playerFound == true){
+            System.out.println(nameInput+" has been drafted to Team A");
+            draftCounter++; 
+        } else{
+            System.out.println("ERROR --> PLAYER NOT FOUND");
+        }
         
     }
     /* 
@@ -410,6 +416,7 @@ public class Driver{
     */
     public static void oDraft(){
         Scanner input = new Scanner(System.in);
+        boolean playerFound = false;
         System.out.print("\nEnter player name you wish to draft: ");
         String name = input.nextLine();
         System.out.print("\nEnter the name of the team the player should be drafted to: ");
@@ -451,6 +458,7 @@ public class Driver{
                         }else{
                             teamPt.addPitcher(player, draftCounter);
                             name = player.getPlayerName();
+                            playerFound = true;
                             break searchDBLoop;
                         }
                     case "Batter":
@@ -462,6 +470,7 @@ public class Driver{
                         }else{
                             teamPt.addPlayer(player, draftCounter);
                             name = player.getPlayerName();
+                            playerFound = true;
                             break searchDBLoop;
                         }
                     default:
@@ -469,8 +478,13 @@ public class Driver{
                 }
             }
         }
-        System.out.println(name+" has been drafted to "+teamPt.teamName);
-        draftCounter++;
+        if(playerFound == true){
+            System.out.println(name+" has been drafted to "+teamPt.teamName);
+            draftCounter++;
+        }else{
+            System.out.println("ERROR ---> PLAYER NOT FOUND");
+            draftCounter--;
+        }
     }
 
     /* 
