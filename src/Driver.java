@@ -15,11 +15,11 @@ public class Driver{
 
     //ArrayList to act as a database for freeAgents, pick from for draft
     // public static ArrayList<Player> freeAgents = new ArrayList<Player>();
-
+   
     public static void main(String[] args) throws Exception {
         //Read in the batter and pitchers
-        readInPlayerFile(new File("FantasyBaseballDrafter/player_stats/mlb_al_batter_stats_2023.txt"), "Batter");
-        readInPlayerFile(new File("FantasyBaseballDrafter/player_stats/mlb_al_pitching_stats_2023.txt"), "Pitcher");
+        readInPlayerFile(new File("final-project-schroebakerhuynh/player_stats/mlb_al_batter_stats_2023.txt"), "Batter");
+        readInPlayerFile(new File("final-project-schroebakerhuynh/player_stats/mlb_al_pitching_stats_2023.txt"), "Pitcher");
 
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
