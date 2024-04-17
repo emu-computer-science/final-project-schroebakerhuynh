@@ -57,8 +57,9 @@ public class Team {
 		* PROGRAMMER: Mack Baker
 		* hasFullPitchingStaff()
 		* 
-		* 
-		* 
+		* Checks to see if the team has a full pitching staff
+		*
+		* @return boolean
    		 */
 		public boolean hasFullPitchingStaff(){
 			if(this.pitcher1 == null || this.pitcher2 == null || this.pitcher3 == null || this.pitcher4 == null || this.pitcher5 == null){
@@ -72,8 +73,10 @@ public class Team {
 		* PROGRAMMER: Mack Baker
 		* hasFullPosition()
 		* 
-		* 
-		* 
+		* Checks to see if a positon is already full
+		*
+		*@param String pos
+		*@return boolean
    		 */
 		public boolean hasPosition(String pos){
 			switch(pos){
@@ -135,8 +138,10 @@ public class Team {
 		* PROGRAMMER: Mack Baker
 		* addPitcher()
 		* 
+		* Add pitcher to team
 		* 
-		* 
+		*@param Player player
+		*@param int draftCounter
    		 */
 		public void addPitcher(Player player, int draftCounter){
 			if(this.pitcher1 == null){
@@ -160,8 +165,10 @@ public class Team {
 		* PROGRAMMER: Mack Baker
 		* addPlayer()
 		* 
+		* Add batter to team
 		* 
-		* 
+		*@param Player player
+		*@param int draftCounter
    		 */
 		public void addPlayer(Player player, int draftCounter){
 			switch(player.getPosition()){
