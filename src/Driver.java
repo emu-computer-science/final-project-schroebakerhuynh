@@ -574,7 +574,8 @@ public class Driver{
             System.out.println("ERROR ---> PLAYER NOT FOUND");
             draftCounter--;
         }
-    }    
+    }
+        
 
     /* 
      * PROGRAMMER: MACK BAKER
