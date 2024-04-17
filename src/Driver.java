@@ -158,7 +158,11 @@ public class Driver{
                 while ((line = reader.readLine()) != null && !line.startsWith("TEAM")) {
                     for (Player player : playerDB) {
                         if (player.getPlayerName().equals(line)) {
-                            teamA.addPlayer(player, draftCounter);
+                            if(player.getPlayerType().toLowerCase().equals("pitcher")){
+                                teamA.addPitcher(player,draftCounter);
+                            }else{
+                                teamA.addPlayer(player, draftCounter);
+                            }
                             break;
                         }
                     }
@@ -169,7 +173,11 @@ public class Driver{
                 while ((line = reader.readLine()) != null && !line.startsWith("TEAM")) {
                     for (Player player : playerDB) {
                         if (player.getPlayerName().equals(line)) {
-                            teamB.addPlayer(player, draftCounter);
+                            if(player.getPlayerType().toLowerCase().equals("pitcher")){
+                                teamB.addPitcher(player,draftCounter);
+                            }else{
+                                teamB.addPlayer(player, draftCounter);
+                            }
                             break;
                         }
                     }
@@ -180,7 +188,11 @@ public class Driver{
                 while ((line = reader.readLine()) != null && !line.startsWith("TEAM")) {
                     for (Player player : playerDB) {
                         if (player.getPlayerName().equals(line)) {
-                            teamC.addPlayer(player, draftCounter);
+                            if(player.getPlayerType().toLowerCase().equals("pitcher")){
+                                teamC.addPitcher(player,draftCounter);
+                            }else{
+                                teamC.addPlayer(player, draftCounter);
+                            }
                             break;
                         }
                     }
@@ -191,7 +203,11 @@ public class Driver{
                 while ((line = reader.readLine()) != null && !line.startsWith("TEAM")) {
                     for (Player player : playerDB) {
                         if (player.getPlayerName().equals(line)) {
-                            teamD.addPlayer(player, draftCounter);
+                            if(player.getPlayerType().toLowerCase().equals("pitcher")){
+                                teamD.addPitcher(player,draftCounter);
+                            }else{
+                                teamD.addPlayer(player, draftCounter);
+                            }
                             break;
                         }
                     }
@@ -288,7 +304,7 @@ public class Driver{
         try {
             //Get evaluation input from user
             Scanner input = new Scanner(System.in);
-            System.out.print("\nPLEASE ENTER YOUR EVALUATION EXPRESSION: ");
+            System.out.print("\nPLEASE ENTER YOUR EVALUATION EXPRESSION (BA, OBP, AB, SLG, SB *CANNOT DIVIDE BY ZERO*): ");
             String evaluationString = input.nextLine();
 
             //Construct ExpressionBuilder from eval string
@@ -346,7 +362,7 @@ public class Driver{
         try {
             //Get evaluation expression from user
             Scanner input = new Scanner(System.in);
-            System.out.print("\nPLEASE ENTER YOUR EVALUATION EXPRESSION: ");
+            System.out.print("\nPLEASE ENTER YOUR EVALUATION EXPRESSION (G, GS, ERA, IP, BB *CANNOT DIVIDE BY ZERO): ");
             String evaluationString = input.nextLine();
 
             //Build ExpressionBuilder from eval string
