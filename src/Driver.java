@@ -74,6 +74,7 @@ public class Driver{
                     break;
                 case "HELP":
                     help();
+                    break;
                 case "QUIT":
                     running = false;
                     break;
@@ -137,7 +138,6 @@ public class Driver{
             while((line = br.readLine()) != null){
                 String[] thisPlayerStats = line.split(",");
                 playerDB.add(new Player(thisPlayerStats, playerType));
-                //freeAgents.add(new Player(thisPlayerStats, playerType));
             }
             br.close();
         } catch (Exception e) {
