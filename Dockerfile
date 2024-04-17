@@ -18,3 +18,7 @@ RUN javac -cp .:/app/lib/* /app/src/*.java
 
 # Specify the command to run your Java application
 CMD ["java", "-cp", ".:/app/lib/*:/app/src", "Driver"]
+
+# to run docker container
+#docker build -t my-java-app .
+#docker run -it my-java-app
