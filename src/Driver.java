@@ -263,57 +263,10 @@ public class Driver{
      *
     */
     public static void displayPlayers() {
-  
-        int pageSize = 20;
-        int currentPage = 0;
-        int totalPages = (int) Math.ceil((double) playerDB.size() / pageSize);
-    
-        Scanner scanner = new Scanner(System.in);
-    
-        while (currentPage < totalPages) {
-            int startIndex = currentPage * pageSize;
-            int endIndex = Math.min((currentPage + 1) * pageSize, playerDB.size());
-    
-            for (int i = startIndex; i < endIndex; i++) {
-                Player player = playerDB.get(i);
-                System.out.println(player.getPlayerType() + " " + player.getPlayerName() + " " + player.getPosition());
-            }
-    
-            System.out.println("\nPage " + (currentPage + 1) + " of " + totalPages);
-            System.out.println("1. Next Page");
-            if (currentPage > 0) {
-                System.out.println("2. Previous Page");
-            }
-            System.out.println("3. Return to Menu");
-            System.out.println("Enter your choice:");
-    
-            int choice = scanner.nextInt();
-            scanner.nextLine();
-    
-            switch (choice) {
-                case 1:
-                    if (currentPage < totalPages - 1) {
-                        currentPage++;
-                    } else {
-                        System.out.println("You are already on the last page.");
-                    }
-                    break;
-                case 2:
-                    if (currentPage > 0) {
-                        currentPage--;
-                    } else {
-                        System.out.println("You are already on the first page.");
-                    }
-                    break;
-                case 3:
-                    return;
-                default:
-                    System.out.println("Invalid choice. Please try again.");
-                    break;
-            }
+        System.out.println("All Players:");
+        for (Player player : playerDB) {
+            System.out.println(player.getPlayerType() + " " + player.getPlayerName() + " " + player.getPosition());
         }
-    
-        scanner.close();
     }
 
     /* 
@@ -629,7 +582,8 @@ public class Driver{
             System.out.println("ERROR ---> PLAYER NOT FOUND");
             draftCounter--;
         }
-    }    
+    }
+        
 
     /* 
      * PROGRAMMER: MACK BAKER
@@ -709,7 +663,4 @@ public class Driver{
             }
         }
     }
-
-
-
 }
