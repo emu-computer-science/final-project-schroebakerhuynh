@@ -18,8 +18,8 @@ public class Driver{
    
     public static void main(String[] args) throws Exception {
         //Read in the batter and pitchers
-        readInPlayerFile(new File("final-project-schroebakerhuynh/player_stats/mlb_al_batter_stats_2023.txt"), "Batter");
-        readInPlayerFile(new File("final-project-schroebakerhuynh/player_stats/mlb_al_pitching_stats_2023.txt"), "Pitcher");
+        readInPlayerFile(new File("player_stats/mlb_al_batter_stats_2023.txt"), "Batter");
+        readInPlayerFile(new File("player_stats/mlb_al_pitching_stats_2023.txt"), "Pitcher");
 
         Scanner scanner = new Scanner(System.in);
         boolean running = true;
@@ -72,6 +72,12 @@ public class Driver{
                 case "PEVALFUN":
                     pevalFun();
                     break;
+                case "SAVE":
+                    save();
+                    break;
+                case "RESTORE":
+                    restore();
+                    break;
                 case "HELP":
                     help();
                     break;
@@ -87,12 +93,96 @@ public class Driver{
         scanner.close();
     }
 
-    public static void save(){
-        Scanner input = new Scanner(System.in);
-        System.out.print("\nEnter the name of the file you which to save to (MUST END WITH .txt): ");
-        String fileName = input.nextLine();
-        
+    public static void save() {
+        try (PrintWriter writer = new PrintWriter(new FileWriter("saved_state.txt"))) {
+            // Writing drafted player names for each team
+            writer.println("TEAM_A_DRAFTED_PLAYERS");
+            for (Player player : teamA.roster) {
+                writer.println(player.getPlayerName());
+            }
+
+            writer.println("TEAM_B_DRAFTED_PLAYERS");
+            for (Player player : teamB.roster) {
+                writer.println(player.getPlayerName());
+            }
+
+            writer.println("TEAM_C_DRAFTED_PLAYERS");
+            for (Player player : teamC.roster) {
+                writer.println(player.getPlayerName());
+            }
+
+            writer.println("TEAM_D_DRAFTED_PLAYERS");
+            for (Player player : teamD.roster) {
+                writer.println(player.getPlayerName());
+            }
+
+            writer.println("DRAFT_COUNTER=" + draftCounter);
+            System.out.println("Program state saved successfully.");
+        } catch (IOException e) {
+            System.out.println("Error saving program state: " + e.getMessage());
+        }
     }
+
+    public static void restore() {
+    try (BufferedReader reader = new BufferedReader(new FileReader("saved_state.txt"))) {
+        String line;
+        while ((line = reader.readLine()) != null) {
+            System.out.println("Reading line: " + line);
+
+            if (line.equals("TEAM_A_DRAFTED_PLAYERS")) {
+                while ((line = reader.readLine()) != null && !line.startsWith("TEAM")) {
+                    for (Player player : playerDB) {
+                        if (player.getPlayerName().equals(line)) {
+                            teamA.addPlayer(player, draftCounter);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (line != null && line.equals("TEAM_B_DRAFTED_PLAYERS")) {
+                while ((line = reader.readLine()) != null && !line.startsWith("TEAM")) {
+                    for (Player player : playerDB) {
+                        if (player.getPlayerName().equals(line)) {
+                            teamB.addPlayer(player, draftCounter);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (line != null && line.equals("TEAM_C_DRAFTED_PLAYERS")) {
+                while ((line = reader.readLine()) != null && !line.startsWith("TEAM")) {
+                    for (Player player : playerDB) {
+                        if (player.getPlayerName().equals(line)) {
+                            teamC.addPlayer(player, draftCounter);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (line != null && line.equals("TEAM_D_DRAFTED_PLAYERS")) {
+                while ((line = reader.readLine()) != null && !line.startsWith("TEAM")) {
+                    for (Player player : playerDB) {
+                        if (player.getPlayerName().equals(line)) {
+                            teamD.addPlayer(player, draftCounter);
+                            break;
+                        }
+                    }
+                }
+            }
+
+            if (line != null && line.startsWith("DRAFT_COUNTER")) {
+                draftCounter = Integer.parseInt(line.split("=")[1]);
+            }
+        }
+        System.out.println("Program state restored successfully.");
+    } catch (IOException e) {
+        System.out.println("Error restoring program state: " + e.getMessage());
+    }
+}
+
 
     /* 
      * PROGRAMMER: BRANDON HUYHN + MACK BAKER
@@ -357,7 +447,7 @@ public class Driver{
      * 
      * 
     */
-    public static void iDraft(){
+    public static void iDraft() {
         Scanner input = new Scanner(System.in);
         System.out.print("\nEnter player name you wish to draft: ");
         boolean playerFound = false;
@@ -400,13 +490,12 @@ public class Driver{
                 }
             }
         }
-        if(playerFound == true){
-            System.out.println(nameInput+" has been drafted to Team A");
-            draftCounter++; 
-        } else{
+        if (playerFound) {
+            System.out.println(nameInput + " has been drafted to Team A");
+            draftCounter++;
+        } else {
             System.out.println("ERROR --> PLAYER NOT FOUND");
         }
-        
     }
     /* 
      * PROGRAMMER: ANDREW SCHROEDER + MACK BAKER
@@ -414,7 +503,7 @@ public class Driver{
      * 
      * 
     */
-    public static void oDraft(){
+    public static void oDraft() {
         Scanner input = new Scanner(System.in);
         boolean playerFound = false;
         System.out.print("\nEnter player name you wish to draft: ");
@@ -478,14 +567,14 @@ public class Driver{
                 }
             }
         }
-        if(playerFound == true){
-            System.out.println(name+" has been drafted to "+teamPt.teamName);
+        if (playerFound) {
+            System.out.println(name + " has been drafted to " + teamPt.teamName);
             draftCounter++;
-        }else{
+        } else {
             System.out.println("ERROR ---> PLAYER NOT FOUND");
             draftCounter--;
         }
-    }
+    }    
 
     /* 
      * PROGRAMMER: MACK BAKER
