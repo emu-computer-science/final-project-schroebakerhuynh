@@ -26,9 +26,9 @@ public class Team {
 		public Player secondbase;
 		public Player thirdbase;
 		public Player shortstop;
-		private Player rightfield;
-		private Player centerfield;
-		private Player leftfield;
+		public Player rightfield;
+		public Player centerfield;
+		public Player leftfield;
 		
 //**********************************CONSTRUCTORS****************************************
 		
